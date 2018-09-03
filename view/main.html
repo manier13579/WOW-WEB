@@ -1,0 +1,64 @@
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<div class="layui-col-md4">
+  <div class="layui-card viewBtn2" view="wow">
+    <div class="layui-card-header">魔兽世界</div>
+    <div class="layui-card-body img-wow">
+    </div>
+  </div>
+</div>
+
+<div class="layui-col-md4">
+  <div class="layui-card viewBtn2" view="travian">
+    <div class="layui-card-header">部落战争 - Travian</div>
+    <div class="layui-card-body img-travian">
+    </div>
+  </div>
+</div>
+
+<div class="layui-col-md4">
+  <div class="layui-card viewBtn3" view="http://www.baidu.com">
+    <div class="layui-card-header">百度</div>
+    <div class="layui-card-body img-baidu">
+    </div>
+  </div>
+</div>
+
+<div class="layui-col-md4">
+  <div class="layui-card">
+    <div class="layui-card-header">待定</div>
+    <div class="layui-card-body">
+
+    </div>
+  </div>
+</div>
+
+<div class="layui-col-md4">
+  <div class="layui-card">
+    <div class="layui-card-header">待定</div>
+    <div class="layui-card-body">
+
+    </div>
+  </div>
+</div>
+
+<div class="layui-col-md4">
+  <div class="layui-card">
+    <div class="layui-card-header">待定</div>
+    <div class="layui-card-body">
+
+    </div>
+  </div>
+</div>
+
+<script>
+$('.viewBtn2').click(function(){
+  var view = $(this).attr('view');
+  $('.viewBtn[view="'+view+'"]').click();
+});
+
+$('.viewBtn3').click(function(){
+  var view = $(this).attr('view');
+  window.open(view);
+});
+</script>
