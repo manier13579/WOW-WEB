@@ -8,9 +8,9 @@ $site = array(
 );
 
 function DbOpen($db_name){
-	$host = "127.0.0.1";
-	$db_user = "root";
-	$db_pass = "root";
+	$host = "wjcxxzx.cn";
+	$db_user = "bing";
+	$db_pass = "906124";
 	$timezone = "Asia/Beijing";
 	$setutf8 = "SET NAMES utf8";
   

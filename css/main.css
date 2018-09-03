@@ -1,0 +1,25 @@
+.layui-card-body{
+  min-height:200px;
+}
+.img-wow{
+  background-image: url(../images/1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.img-travian{
+  background-image: url(../images/travian.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.img-baidu{
+  background-image: url(../images/baidu.png);
+  background-repeat: no-repeat;
+  background-size: 50% 30%;
+  background-position:center;
+  -moz-background-size: 100% 100%;
+}
+.layui-card{
+  cursor:pointer;
+}

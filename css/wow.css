@@ -1,3 +1,20 @@
+.layui-input{
+  height:33px !important;
+}
+.layui-form-label{
+  padding: 7px 0px !important;
+  width:90px !important;
+}
+.layui-form-item{
+  margin-bottom: 5px !important;
+}
+.layui-btn-primary a{
+  color:#555;
+  height:100%;
+}
+.layui-btn-normal a{
+  color:#eee;
+}
 .left-title{
   position:relative;
   padding:12px 0px;
