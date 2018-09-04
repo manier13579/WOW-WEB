@@ -1,0 +1,106 @@
+<div class="layui-card">
+  <div class="layui-card-header">注册审核</div>
+  <div class="layui-card-body">
+    <table class="layui-table" id="table1" lay-filter="table1"></table>
+  </div>
+</div>
+<script>
+layui.use(['table'], function(){
+  var table = layui.table;
+  //页面首次打开自动加载表格
+  formShow();
+  
+  function formShow(){
+    var action = 'init';
+    table1 = table.render({
+      elem:'#table1',
+      url: rootpath+'/src/controller/audit_controller.php',
+      where: {
+        "action":action,
+      },
+      headers:{"Authorization":access_token},
+      even:true,
+      height:'full-300',
+      size:'sm',
+      method: 'post',
+      id:'table1',
+      page: true, //是否开启分页
+      cols:  [[ //标题栏
+        {field: 'userid',title:'用户名', fixed: 'left',width:150, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'username', title: '实名', fixed: 'left', width:100, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'permission', title: '权限', width:80, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'join_date', title: '注册日期', width:150, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'password', title: '密码', width:130,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'email', title: '邮箱', width:150,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'phone', title: '手机', width:120, align:'center', sort: true,style:"text-align:center;font-size:12px;", event: 'devMore', style:'cursor: pointer;color:#01AAED;'},
+        {field: 'last_login', title: '最后登录日期', width:150,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'last_ip', title: '最后登录IP', width:120,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:150}
+      ]],
+      done: function(res, curr, count){
+        table1Data = res.data;
+        
+      }
+    }); 
+  }
+  //监听行工具事件
+  table.on('tool(table1)', function(obj){
+    var data = obj.data;
+    console.log(data)
+    if(obj.event === 'del'){
+      layer.confirm('确定取消 '+data.username+' 的权限?', function(index){
+        ajax = $.ajax({
+          url:"src/controller/audit_controller.php",
+          async:true,
+          type: 'post',
+          data: {
+            "action":"del",
+            "userid":data.userid
+          },
+          headers:{"Authorization":access_token},
+          success:function(msg){
+            validate(msg);
+            if(msg=='ok'){
+              parent.layer.msg("除权成功");
+              layer.close(index);
+              formShow();
+            }else{
+              parent.layer.msg("失败");
+              layer.close(index);
+            }
+            
+          }
+        });
+        
+      });
+    } else if(obj.event === 'upgrade'){
+      ajax = $.ajax({
+        url:"src/controller/audit_controller.php",
+        async:true,
+        type: 'post',
+        data: {
+          "action":"upgrade",
+          "userid":data.userid,
+          "password":data.password,
+        },
+        headers:{"Authorization":access_token},
+        success:function(msg){
+          validate(msg);
+          if(msg=='ok'){
+            layer.msg("审核成功");
+            formShow();
+          }else{
+            layer.msg("失败");
+          }
+        }
+      });
+    }
+  });
+});
+
+</script>
+
+<script type="text/html" id="barEdit">
+  <a class="layui-btn layui-btn-xs" lay-event="upgrade">审核</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">除权</a>
+</script>

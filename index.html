@@ -2,13 +2,13 @@
 <head>
   <title>王家场世界</title>
   <meta http-equiv="content-type" content="text/html" charset="UTF-8">
-  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/layui/layui.js"></script>
-  <script type="text/javascript" src="js/common.js"></script>
+  <script type="text/javascript" src="src/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="src/js/layui/layui.js"></script>
+  <script type="text/javascript" src="src/js/common.js"></script>
   
-  <link rel="stylesheet" type="text/css" href="js//layui/css/layui.css">
-  <link rel="stylesheet" type="text/css" href="css/index.css" />
-  <link rel="shortcut icon" href="favicon.ico" type="images/x-icon" />
+  <link rel="stylesheet" type="text/css" href="src/js/layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="src/css/index.css" />
+  <link rel="shortcut icon" href="src/images/favicon.ico" type="images/x-icon" />
   
 </head>
 
@@ -28,7 +28,7 @@
           <a>游戏中心</a>
           <dl class="layui-nav-child"> <!-- 二级菜单 -->
             <dd class="viewBtn" view="wow"><a>魔兽世界</a></dd>
-            <dd><a>Travian - 开发中</a></dd>
+            <dd class="viewBtnHref" view="/travian"><a>部落战争</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -37,16 +37,22 @@
             <dd><a>敬请期待</a></dd>
           </dl>
         </li>
+        <li class="layui-nav-item" id="manage">
+          <a>后台管理</a>
+          <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <dd class="viewBtn" view="audit"><a>注册审核</a></dd>
+          </dl>
+        </li>
         <li class="layui-nav-item bing-right">
           <a href="javascript:;">
-            <span class="bing-username">未登录</span>
+            <span class="username">未登录</span>
           </a>
           <dl class="layui-nav-child"> <!-- 二级菜单 -->
-            <dd style="text-align: center" class="viewBtn" view="account"><a>登录 / 注册</a></dd>
-            <dd style="text-align: center"><a>基本资料</a></dd>
-            <dd style="text-align: center"><a>修改密码</a></dd>
-            <hr>
-            <dd style="text-align: center"><a class="bing-logout">退出</a></dd>
+            <dd style="text-align: center" class="viewBtn nologin" view="account"><a>登录 / 注册</a></dd>
+            <dd style="text-align: center" class="login"><a>基本资料</a></dd>
+            <dd style="text-align: center" class="login"><a>修改密码</a></dd>
+            <hr class="login">
+            <dd style="text-align: center" class="login"><a class="logout">退出</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item bing-right viewBtn" view="buy"><a>充值</a></li>
@@ -75,6 +81,10 @@
 </html>
 
 <script type="text/javascript">
+if(!sessionStorage.access_token){
+  sessionStorage.access_token = 'notlogin';
+}
+var access_token = sessionStorage.access_token;
 
 //初始化页面
 if(!sessionStorage.viewNow){
@@ -83,16 +93,40 @@ if(!sessionStorage.viewNow){
 }else{
   $('.viewBtn[view="'+sessionStorage.viewNow+'"]').addClass('layui-this').parents('li').addClass('layui-this');
 }
-$('#view').load('view/'+sessionStorage.viewNow+'.html');
+$('#view').load('src/view/'+sessionStorage.viewNow+'.html');
 
+//高级权限
+if(sessionStorage.permission == 9){
+  $('#manage').css('display','inline-block');
+}
+
+//用户名初始化
+if(sessionStorage.username){
+  $('.username').text(sessionStorage.username);
+  $('.login').show();
+  $('.nologin').hide();
+}
+
+//引用退出控制器
+loadJS('src/controller/Logout.js',function(){
+  //用户退出登录按钮点击事件
+  $('.logout').click(function(){
+    Logout();
+  });
+
+});
 
 //导航 - 按钮点击事件
 $('.viewBtn').click(function(){
   var view = $(this).attr('view');
   sessionStorage.viewNow = view;
-  $('#view').load('view/'+view+'.html');
+  $('#view').load('src/view/'+view+'.html');
   $('.layui-nav-item').removeClass('layui-this');
   $('.viewBtn[view="'+sessionStorage.viewNow+'"]').addClass('layui-this').parents('li').addClass('layui-this');
+});
+$('.viewBtnHref').click(function(){
+  var view = $(this).attr('view');
+  window.open(view);
 });
 
 
