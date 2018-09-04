@@ -1,0 +1,82 @@
+<link rel="stylesheet" type="text/css" href="src/css/buy.css">
+<div class="layui-col-md3">
+  <div class="layui-card">
+    <div class="layui-card-header">服务选择</div>
+    <div class="layui-card-body">
+      <div class="ser-wrap this" buy="wow">
+        <div class="ser-logo logo-wow"></div>
+        <div class="ser-title">魔兽世界</div>
+      </div>
+      <div class="ser-wrap" buy="travian">
+        <div class="ser-logo logo-travian"></div>
+        <div class="ser-title">部落战争</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="layui-col-md9">
+  <div class="layui-card">
+    <div class="layui-card-header">充值选择</div>
+    <div class="layui-card-body">
+      <div id="wow">
+        <div class="top-wrap">
+          <div class="layui-row layui-col-space30">
+            <div class="layui-col-md4">
+              <div class="layui-card">
+                <div class="layui-card-body card-wow-wrap card-this">
+                  <div class="card-wow-logo"></div>
+                  <div class="card-wow-text">
+                    <span class="card-wow-price">0.99</span> 元
+                    <span class="card-wow-time">1000</span> 分钟游戏时间
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md4">
+              <div class="layui-card">
+                <div class="layui-card-body card-wow-wrap">
+                  <div class="card-wow-logo"></div>
+                  <div class="card-wow-text">
+                    <span class="card-wow-price">0.49</span> 元
+                    <span class="card-wow-bird">鸟点</span> 全开
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-md4">
+              <div class="layui-card">
+                <div class="layui-card-body card-wow-wrap">
+                  <div class="card-wow-logo"></div>
+                  <div class="card-wow-text">
+                    <span class="card-wow-price">0.1</span> 元
+                    <span class="card-wow-gold">1000</span> 金币
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+    </div>
+  </div>
+
+</div>
+
+<script>
+$('.ser-wrap').click(function(){
+  if($(this).hasClass('this')){return;}
+  $('.ser-wrap').removeClass('this');
+  $(this).addClass('this');
+  var buy = $(this).attr('buy');
+});
+
+$('.card-wow-wrap').click(function(){
+  $('.card-wow-wrap').removeClass('card-this');
+  $(this).addClass('card-this');
+});
+
+</script>

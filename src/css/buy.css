@@ -1,0 +1,94 @@
+.ser-wrap{
+  position:relative;
+  padding:8px 5px 8px 5px;
+  cursor:pointer;
+}
+.ser-wrap:hover{
+  background-color:#eee;
+}
+.ser-logo{
+  position:absolute;
+  width:23px;
+  height:23px;
+}
+.ser-title{
+  padding-left:40px;
+  color:#555;
+}
+.this{
+  background-color:#5FB878;
+}
+.this .ser-title{
+  color:#fff;
+}
+.logo-wow{
+  left:13px;
+  top:9px;
+  background-image: url(../images/wow.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.logo-travian{
+  left:13px;
+  top:9px;
+  background-image: url(../images/travian.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.card-wow-wrap{
+  background-color:#000;
+  border-radius:5px;
+  cursor:pointer;
+  border:1px solid #ccc;
+  box-shadow: darkgrey 1px 1px 5px 1px ;
+}
+.card-wow-wrap:hover{
+  border:1px solid #fff;
+  box-shadow: #1E9FFF 1px 1px 8px 1px ;
+}
+.card-wow-logo{
+  width:160px;
+  height:60px;
+  margin-left:16px;
+  background-image: url(../images/logo1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.card-wow-text{
+  color:#EBF9F8;
+  font-weight:800;
+  font-size:12px;
+  text-align:center;
+}
+.card-wow-price{
+  color:#ECC53A;
+  font-size:18px;
+}
+.card-wow-time{
+  color:#ECC53A;
+  font-size:15px;
+  border-left:1px dotted #EBF9F8;
+  padding-left:5px;
+  margin-left:3px;
+}
+.card-wow-bird{
+  color:#ECC53A;
+  font-size:18px;
+  border-left:1px dotted #EBF9F8;
+  padding-left:15px;
+  margin-left:13px;
+}
+.card-wow-gold{
+  color:#ECC53A;
+  font-size:18px;
+  border-left:1px dotted #EBF9F8;
+  padding-left:14px;
+  margin-left:12px;
+}
+.card-this{
+  border:1px solid #fff;
+  box-shadow: #1E9FFF 1px 1px 8px 2px ;
+}

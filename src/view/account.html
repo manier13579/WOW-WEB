@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="src/css/account.css">
 
-<div class="layui-col-m12">
+<div class="layui-col-md12">
   <div class="layui-card">
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
       <ul class="layui-tab-title">
@@ -148,7 +148,18 @@ layui.use('form', function(){
       type: 'post',
       data: {"regData":data.field},
       success:function(res){
-        res = JSON.parse(res);
+        function jsonstr(str){
+          var p = new Promise(function(resolve,reject){
+            var cc = JSON.parse(str);
+            resolve(cc);
+          });
+          return p;
+        }
+        jsonstr(res).then(function(jsonres){
+          console.log(jsonres);
+          res = jsonres;
+        }).catch(function(err){})
+        //res = JSON.parse(res);
         if(res.code==0){
           var id = layer.msg("登录成功", {
             icon: 1,
