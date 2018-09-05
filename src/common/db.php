@@ -1,9 +1,4 @@
 <?php
-$site = array(
-	//登陆器设置
-	"realmlist" => "set realmlist \"wjcxxzx.cn:3724\"",
-);
-
 //直接访问本文件，重定向到首页
 if (substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1) == 'db.php') {
     header('Location:http://'.$_SERVER['HTTP_HOST']);
