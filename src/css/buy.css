@@ -50,7 +50,7 @@
 .card-wow-logo{
   width: 130px;
   height: 50px;
-  margin-left:15px;
+  margin-left:24px;
   background-image: url(../images/logo1.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -70,8 +70,8 @@
   color:#ECC53A;
   font-size:14px;
   border-left:1px dotted #EBF9F8;
-  padding-left:2px;
-  margin-left:1px;
+  padding-left:5px;
+  margin-left:6px;
 }
 .card-wow-bird{
   color:#ECC53A;

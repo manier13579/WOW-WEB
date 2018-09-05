@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="src/css/buy.css">
+<script type="text/javascript" src="src/js/jquery.nicescroll.min.js"></script>
 <script type="text/javascript" src="src/data/goods.js"></script>
 <div class="layui-col-md3">
   <div class="layui-card">
@@ -53,7 +54,7 @@
   <div class="layui-card">
     <div class="layui-tab">
       <ul class="layui-tab-title">
-        <li class="layui-this">充值</li>
+        <li class="layui-this" id="chongzhi">充值</li>
         <li id="order">我的订单</li>
       </ul>
       <div class="layui-tab-content">
@@ -132,6 +133,22 @@ layui.use(['table','form','element'], function(){
   var table = layui.table;
   
   form.render();
+  
+  $(".card-left").niceScroll({
+    cursorcolor:"#999",
+    cursorwidth:"3px",
+    autohidemode:false
+  });
+  
+  $('#chongzhi').click(function(){
+    //显示滚动条
+    $(".nicescroll-cursors").show();
+  });
+  
+  $('#order').click(function(){
+    //隐藏滚动条
+    $(".nicescroll-cursors").hide();
+  });
   
   //订单表初始化
   initOrderTable();
