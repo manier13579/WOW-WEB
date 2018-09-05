@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="src/css/buy.css">
+<script type="text/javascript" src="src/data/goods.js"></script>
 <div class="layui-col-md3">
   <div class="layui-card">
     <div class="layui-card-header">服务选择</div>
@@ -13,70 +14,238 @@
       </div>
     </div>
   </div>
-
+  <div class="layui-card">
+    <div class="layui-card-header">充值说明</div>
+    <div class="layui-card-body">
+      <ul class="layui-timeline">
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title">充值原则</h3>
+            <p>所有商品只要点击了<我已付款>按钮，本系统均认为您已付款，并同时发货。我们相信您的信用o(*￣︶￣*)o</p>
+          </div>
+        </li>
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title">审核机制</h3>
+            <p>每个人在系统中都有信用值，每一笔未付款的订单都会影响您的信用，我们会不定期审核，信用值过低可能会导致您的账号暂时封禁，感谢您的理解</p>
+          </div>
+        </li>
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title">写在最后</h3>
+            <p>您的每一次充值，都能让我们有更大的动力提供更优质的服务~</p>
+          </div>
+        </li>
+        <li class="layui-timeline-item">
+          <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+          <div class="layui-timeline-content layui-text">
+            <div class="layui-timeline-title">木了</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 <div class="layui-col-md9">
   <div class="layui-card">
-    <div class="layui-card-header">充值选择</div>
-    <div class="layui-card-body">
-      <div id="wow">
-        <div class="top-wrap">
-          <div class="layui-row layui-col-space30">
-            <div class="layui-col-md4">
-              <div class="layui-card">
-                <div class="layui-card-body card-wow-wrap card-this">
-                  <div class="card-wow-logo"></div>
-                  <div class="card-wow-text">
-                    <span class="card-wow-price">0.99</span> 元
-                    <span class="card-wow-time">1000</span> 分钟游戏时间
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="layui-col-md4">
-              <div class="layui-card">
-                <div class="layui-card-body card-wow-wrap">
-                  <div class="card-wow-logo"></div>
-                  <div class="card-wow-text">
-                    <span class="card-wow-price">0.49</span> 元
-                    <span class="card-wow-bird">鸟点</span> 全开
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="layui-col-md4">
-              <div class="layui-card">
-                <div class="layui-card-body card-wow-wrap">
-                  <div class="card-wow-logo"></div>
-                  <div class="card-wow-text">
-                    <span class="card-wow-price">0.1</span> 元
-                    <span class="card-wow-gold">1000</span> 金币
-                  </div>
-                </div>
+    <div class="layui-tab">
+      <ul class="layui-tab-title">
+        <li class="layui-this">充值</li>
+        <li id="order">我的订单</li>
+      </ul>
+      <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+          <div id="wow">
+            <div class="top-wrap clearfix">
+              <div class="layui-col-md4 card-left"></div>
+              <div class="layui-col-md8">
+                <div class="form-wrap">
+                  <form class="layui-form" lay-filter="form" >
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">商品描述</label>
+                      <div class="layui-input-block">
+                        <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="" disabled>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">价格</label>
+                      <div class="layui-form-mid layui-word-aux"><span class="money">0.99</span> 元</div>
+                    </div>
+                    <div class="layui-form-item character-input">
+                      <label class="layui-form-label">角色</label>
+                      <div class="layui-input-block">
+                        <select name="character" lay-verify="required"></select>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">付款方式</label>
+                      <div class="layui-input-block">
+                        <input type="radio" name="pay" lay-filter="pay" value="alipay" title="支付宝" checked>
+                        <input type="radio" name="pay" lay-filter="pay" value="wechat" title="微信">
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <label class="layui-form-label">付款码</label>
+                      <div class="layui-input-block">
+                        <div class="payimg"></div>
+                      </div>
+                    </div>
+                    <div class="layui-form-item">
+                      <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submit">我已付款</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="layui-tab-item">
+          <table id="table1" lay-filter="table1"></table>
+        
+        </div>
       </div>
-    
-    
     </div>
   </div>
-
 </div>
 
+
+
 <script>
-$('.ser-wrap').click(function(){
-  if($(this).hasClass('this')){return;}
-  $('.ser-wrap').removeClass('this');
-  $(this).addClass('this');
-  var buy = $(this).attr('buy');
-});
+var goodinit = 'wow';
 
-$('.card-wow-wrap').click(function(){
-  $('.card-wow-wrap').removeClass('card-this');
-  $(this).addClass('card-this');
+layui.use(['table','form','element'], function(){
+  if(sessionStorage.access_token == 'notlogin'){
+    layer.msg("未登录或登录超时，请登录", {
+      icon: 2,
+      time: 1000 //1秒关闭
+    }, function(){
+      $('.logout').click();
+    });
+  }
+  var form = layui.form;
+  var element = layui.element;
+  var table = layui.table;
+  
+  form.render();
+  
+  //订单表初始化
+  initOrderTable();
+  function initOrderTable(){
+    var action = 'order';
+    table1 = table.render({
+      elem:'#table1',
+      url: rootpath+'/src/controller/buy_controller.php',
+      where: {"action":action},
+      headers:{"Authorization":access_token},
+      even:true,
+      height:'full-300',
+      size:'sm',
+      method: 'post',
+      id:'table1',
+      page: true, //是否开启分页
+      cols:  [[ //标题栏
+        {field: 'orderid', title: '订单号', width:80, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'name', title: '商品名', width:200, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'pay', title: '支付方式', width:90,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'date', title: '下单日期',align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'status', title: '到货状态', width:90, align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'audit', title: '审核状态', width:90,  sort: true,align:'center',style:"text-align:center;font-size:12px;"}
+      ]],
+      done: function(res, curr, count){
+        table1Data = res.data;
+        
+      }
+    }); 
+  }
+  
+  $('.ser-wrap').click(function(){
+    if($(this).hasClass('this')){return;}
+    $('.ser-wrap').removeClass('this');
+    $(this).addClass('this');
+    goodinit = $(this).attr('buy');
+    initCard(goodinit);
+  });
+  initCard(goodinit);
+  function initCard(good){
+    $('.card-left').html("");
+    if(goods[good].length>0){
+      for(i=0;i<goods[good].length;i++){
+        //console.log(goods[page][i]);
+        $('.card-left').append('<div class="layui-card">'+
+          '<div class="layui-card-body card-wow-wrap" card="'+goods[good][i].id+'">'+
+          '<div class="card-wow-logo"></div>'+
+          '<div class="card-wow-text">'+goods[good][i].html+'</div></div></div>');
+      }
+      $('.card-wow-wrap').click(function(){
+        $('.card-wow-wrap').removeClass('card-this');
+        $(this).addClass('card-this');
+        var card = $(this).attr('card');
+        $('input[name="name"]').val(goods[goodinit][card].name);
+        $('.money').text(goods[goodinit][card].money);
+        if(goods[goodinit][card].character){
+          $('.character-input').show();
+        }else{
+          $('.character-input').hide();
+        }
+      });
+      $('.card-wow-wrap')[0].click();
+    }else{
+      layer.msg('当前服务无商品');
+      $('.ser-wrap')[0].click();
+    }
+  }
+  
+  //付款码切换
+  form.on('radio(pay)', function(data){
+    if(data.value=='alipay'){
+      $('.payimg').css('background-image','url(src/images/alipay.png)');
+    }else{
+      $('.payimg').css('background-image','url(src/images/黑科技.jpg)');
+    }
+  });  
+  
+  
+  //监听提交
+  form.on('submit(submit)', function(data){
+    data.field.good = goodinit;
+    data.field.userid = sessionStorage.userid; 
+    data.field.id = $('.card-this').attr('card');
+    if(goods[goodinit][data.field.id].character && data.field.character == ''){
+      layer.msg('请先创建角色');
+      return false;
+    }
+    console.log(data.field);
+    var action = 'buy';
+    ajax = $.ajax({
+      url:"src/controller/buy_controller.php",
+      async:true,
+      type: 'post',
+      data: {
+        "action":action,
+        "goodinfo":data.field
+      },
+      headers:{"Authorization":access_token},
+      success:function(msg){
+        validate(msg);
+        res = JSON.parse(msg);
+        if(res.code==0){
+          layer.msg("购买成功！", {
+            icon: 1,
+            time: 1500
+          }, function(){
+            $('#order').click();
+            
+          });
+        }
+      }
+    });
+    
+    return false;
+  });
 });
-
 </script>

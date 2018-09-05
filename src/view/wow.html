@@ -32,8 +32,8 @@
           <li class="layui-timeline-item">
             <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
             <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">出生金币10W金</h3>
-              <p>出生就当大富翁</p>
+              <h3 class="layui-timeline-title">出生金币1000金</h3>
+              <p>助你轻松过度</p>
             </div>
           </li>
           <li class="layui-timeline-item">
@@ -53,7 +53,7 @@
           <li class="layui-timeline-item">
             <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
             <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">炉石CD 15分钟</h3>
+              <h3 class="layui-timeline-title">炉石无CD</h3>
               <p>回家可以更频繁</p>
             </div>
           </li>
@@ -81,15 +81,8 @@
           <li class="layui-timeline-item">
             <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
             <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">鸟点全开</h3>
-              <p>全球直飞，无需跑路探索</p>
-            </div>
-          </li>
-          <li class="layui-timeline-item">
-            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-            <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">天赋点数超多</h3>
-              <p>3系天赋全点满</p>
+              <h3 class="layui-timeline-title">鸟点全开服务</h3>
+              <p>只需4毛9，不再跑路探索</p>
             </div>
           </li>
           <li class="layui-timeline-item">
@@ -214,8 +207,16 @@
 
 <script type="text/javascript">
 
-
 layui.use(['carousel','form'], function(){
+  if(sessionStorage.access_token == 'notlogin'){
+    layer.msg("未登录或登录超时，请登录", {
+      icon: 2,
+      time: 1000 //1秒关闭
+    }, function(){
+      $('.logout').click();
+    });
+  }
+  
   var carousel = layui.carousel;
   var element = layui.element;
   //建造实例
@@ -278,7 +279,6 @@ layui.use(['carousel','form'], function(){
       data: {action},
       headers:{"Authorization":access_token},
       success:function(msg){
-        validate(msg);
         res = JSON.parse(msg);
         html = '';
         for(i=0;i<res.length;i++){

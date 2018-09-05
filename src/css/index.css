@@ -111,11 +111,6 @@ a:active{text-decoration:none;}
 }
 .container{
   width:1040px;
-  overflow: hidden;
-}
-
-.layui-tab-content{
-  padding:0px !important;
 }
 
 .layui-timeline-title{

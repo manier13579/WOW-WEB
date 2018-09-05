@@ -42,16 +42,15 @@
   border-radius:5px;
   cursor:pointer;
   border:1px solid #ccc;
-  box-shadow: darkgrey 1px 1px 5px 1px ;
 }
 .card-wow-wrap:hover{
   border:1px solid #fff;
   box-shadow: #1E9FFF 1px 1px 8px 1px ;
 }
 .card-wow-logo{
-  width:160px;
-  height:60px;
-  margin-left:16px;
+  width: 130px;
+  height: 50px;
+  margin-left:15px;
   background-image: url(../images/logo1.jpg);
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -60,35 +59,78 @@
 .card-wow-text{
   color:#EBF9F8;
   font-weight:800;
-  font-size:12px;
+  font-size:11px;
   text-align:center;
 }
 .card-wow-price{
   color:#ECC53A;
-  font-size:18px;
+  font-size:16px;
 }
 .card-wow-time{
   color:#ECC53A;
-  font-size:15px;
+  font-size:14px;
   border-left:1px dotted #EBF9F8;
-  padding-left:5px;
-  margin-left:3px;
+  padding-left:2px;
+  margin-left:1px;
 }
 .card-wow-bird{
   color:#ECC53A;
-  font-size:18px;
+  font-size:15px;
   border-left:1px dotted #EBF9F8;
-  padding-left:15px;
-  margin-left:13px;
+  padding-left:10px;
+  margin-left:8px;
 }
 .card-wow-gold{
   color:#ECC53A;
-  font-size:18px;
+  font-size:16px;
   border-left:1px dotted #EBF9F8;
-  padding-left:14px;
-  margin-left:12px;
+  padding-left:8px;
+  margin-left:6px;
 }
 .card-this{
   border:1px solid #fff;
   box-shadow: #1E9FFF 1px 1px 8px 2px ;
+}
+
+.form-wrap{
+  margin-top:20px;
+}
+.layui-form-mid span{
+  font-size:18px;
+  color:red;
+}
+.layui-tab-content {
+  padding: 18px !important;
+}
+.layui-col-space15{
+  margin-bottom:10px;
+}
+.container{
+  overflow-x: hidden;
+}
+.layui-form{
+  height:400px;
+}
+.card-left{
+  overflow-y:scroll;
+  padding:15px;
+  border:1px solid #ddd;
+  height:580px;
+}
+.layui-card:last-child {
+    margin-bottom: 15px;
+}
+.payimg{
+  width: 150px;
+  height: 150px;
+  background-image: url(../images/alipay.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+.character-input{
+  display:none;
+}
+.layui-table-cell {
+  padding:0 5px;
 }

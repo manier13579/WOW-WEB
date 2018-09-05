@@ -1,3 +1,6 @@
+.container{
+  overflow: hidden;
+}
 .layui-input{
   height:33px !important;
 }
