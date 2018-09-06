@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="src/css/audit.css">
 <div class="layui-card">
   <div class="layui-card-header">注册审核</div>
   <div class="layui-card-body">
@@ -32,10 +33,10 @@ layui.use(['table'], function(){
         {field: 'join_date', title: '注册日期', width:150, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
         {field: 'password', title: '密码', width:130,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
         {field: 'email', title: '邮箱', width:150,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
-        {field: 'phone', title: '手机', width:120, align:'center', sort: true,style:"text-align:center;font-size:12px;", event: 'devMore', style:'cursor: pointer;color:#01AAED;'},
+        {field: 'phone', title: '手机', width:120, align:'center', sort: true,style:"text-align:center;font-size:12px;"},
         {field: 'last_login', title: '最后登录日期', width:150,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
         {field: 'last_ip', title: '最后登录IP', width:120,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
-        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:150}
+        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:100}
       ]],
       done: function(res, curr, count){
         table1Data = res.data;

@@ -8,13 +8,13 @@ $action = $_POST['action'];
 switch ($action) {
 //查询订单
 case 'order':
-
+  $userid = $_POST["userid"];
   //连接数据库
   $responce = new stdClass();
   $responce->code = 0;
 
   $con = DbOpen('main');
-  $sql = 'SELECT * from order order by order_date asc';
+  $sql = "SELECT * from buy where user_id = '".$userid."' order by order_date asc";
   $result = DbSelect($con, $sql);
 
   $i = 0;
@@ -24,7 +24,7 @@ case 'order':
       'orderid'  => $row['id'],
       'type'     => $row['good_type'],
       'name'     => $row['name'],
-      'character'=> $row['character'],
+      'character'=> $row['character1'],
       'pay'      => $row['pay'],
       'date'     => $row['order_date'],
       'status'   => $row['status'],
@@ -42,7 +42,7 @@ break;
 case 'buy':
   $goodinfo = $_POST["goodinfo"];
   //插入订单表
-  $sql1 = "insert into order (user_id,good_type,good_id,name,pay,character,order_date,status,audit) values ('".$goodinfo['userid']."','".$goodinfo['good']."','".$goodinfo['id']."','".$goodinfo['name']."','".$goodinfo['pay']."','".$goodinfo['character']."',now(),1,0)";
+  $sql1 = "insert into buy (user_id,good_type,good_id,name,pay,character1,order_date,status,audit) values ('".$goodinfo['userid']."','".$goodinfo['good']."','".$goodinfo['id']."','".$goodinfo['name']."','".$goodinfo['pay']."','".$goodinfo['character']."',now(),1,0)";
   $con = DbOpen('main');
   DbSelect($con, $sql1);
   DbClose($con);
@@ -53,7 +53,7 @@ case 'buy':
     case '0': 
       $sql2 = "";
       $con = DbOpen('realmd');
-      DbSelect($con, $sql2);
+      //DbSelect($con, $sql2);
       DbClose($con);
     break;
     

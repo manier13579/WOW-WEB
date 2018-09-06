@@ -157,10 +157,13 @@ layui.use(['table','form','element'], function(){
     table1 = table.render({
       elem:'#table1',
       url: rootpath+'/src/controller/buy_controller.php',
-      where: {"action":action},
+      where: {
+        "action":action,
+        "userid":sessionStorage.userid
+      },
       headers:{"Authorization":access_token},
       even:true,
-      height:'full-300',
+      height:'500',
       size:'sm',
       method: 'post',
       id:'table1',
@@ -249,14 +252,13 @@ layui.use(['table','form','element'], function(){
       headers:{"Authorization":access_token},
       success:function(msg){
         validate(msg);
-        res = JSON.parse(msg);
-        if(res.code==0){
+        if(msg=='ok'){
           layer.msg("购买成功！", {
             icon: 1,
             time: 1500
           }, function(){
             $('#order').click();
-            
+            initOrderTable();
           });
         }
       }

@@ -1,0 +1,79 @@
+<link rel="stylesheet" type="text/css" href="src/css/audit.css">
+<div class="layui-card">
+  <div class="layui-card-header">充值审核</div>
+  <div class="layui-card-body">
+    <table class="layui-table" id="table1" lay-filter="table1"></table>
+  </div>
+</div>
+<script>
+layui.use(['table'], function(){
+  var table = layui.table;
+  //页面首次打开自动加载表格
+  formShow();
+  
+  function formShow(){
+    var action = 'buy';
+    table1 = table.render({
+      elem:'#table1',
+      url: rootpath+'/src/controller/audit_controller.php',
+      where: {
+        "action":action,
+      },
+      headers:{"Authorization":access_token},
+      even:true,
+      height:'full-300',
+      size:'sm',
+      method: 'post',
+      id:'table1',
+      page: true, //是否开启分页
+      cols:  [[ //标题栏
+        {field: 'id',title:'订单号', fixed: 'left',width:50,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'userid',title:'用户名', fixed: 'left',width:120, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'username', title: '实名', fixed: 'left', width:80, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'audit', title:'审核状态', width:90, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'good_type', title: '商品分类', width:100, sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'good_id', title: '商品id', width:50,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'good_name', title: '商品名', width:220,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'pay', title: '支付方式', width:90,align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'character', title: '充值角色', width:150, align:'center', sort: true,style:"text-align:center;font-size:12px;"},
+        {field: 'order_date', title: '订单日期', width:140,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
+        {field: 'status', title: '发货状态', width:60,align:'center',style:"text-align:center;font-size:12px;"},
+        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:50}
+      ]],
+      done: function(res, curr, count){
+        table1Data = res.data;
+        
+      }
+    }); 
+  }
+  //监听行工具事件
+  table.on('tool(table1)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'buyAudit'){
+      ajax = $.ajax({
+        url:"src/controller/audit_controller.php",
+        async:true,
+        type: 'post',
+        data: {
+          "action":"buyAudit",
+          "orderid":data.id
+        },
+        headers:{"Authorization":access_token},
+        success:function(msg){
+          validate(msg);
+          if(msg=='ok'){
+            layer.msg("审核成功");
+            formShow();
+          }else{
+            layer.msg("失败");
+          }
+        }
+      });
+    }
+  });
+});
+
+</script>
+<script type="text/html" id="barEdit">
+  <a class="layui-btn layui-btn-xs" lay-event="buyAudit">审核</a>
+</script>

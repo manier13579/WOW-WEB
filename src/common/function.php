@@ -1,6 +1,4 @@
 <?php
-
-
 //直接访问本文件，重定向到首页
 if (substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1) == 'function.php') {
     header('Location:http://'.$_SERVER['HTTP_HOST'].'/src/view/logout');
