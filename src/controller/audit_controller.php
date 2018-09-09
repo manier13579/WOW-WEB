@@ -50,8 +50,8 @@ case 'upgrade':
   DbClose($con);
   
   //注册魔兽世界账号
-  $sql2 = "INSERT INTO account (username,sha_pass_hash, gmlevel,expansion,last_login) VALUES ('$userid',SHA1(CONCAT(UPPER('$userid'),':',UPPER('$password'))),'1','1',now())";
-  $con = DbOpen('realmd');
+  $sql2 = "INSERT INTO account (username,sha_pass_hash,expansion,last_login) VALUES ('$userid',SHA1(CONCAT(UPPER('$userid'),':',UPPER('$password'))),'1',now())";
+  $con = DbOpen('auth');
   DbSelect($con, $sql2);
   DbClose($con);
 

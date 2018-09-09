@@ -4,7 +4,7 @@ if(!validateToken(getallheaders()['Authorization'])){echo "sessionError";exit;}
 
 require '../common/db.php';
 //连接数据库 
-$con = DbOpen('character');
+$con = DbOpen('characters');
 $action = $_POST['action'];
 
 
@@ -92,15 +92,15 @@ switch ($action){
   
 	case 'showstat' : //读取服务器状态
     DbClose($con);
-    $con = DbOpen('realmd');
-    $sql = "select name,realmflags from realmlist order by id asc";
+    $con = DbOpen('auth');
+    $sql = "select name,flag from realmlist order by id asc";
 		$result = DbSelect($con,$sql) or die("查询失败." . mysqli_error());
     $responce = '';
 		$i = 0;
 		while ($row = mysqli_fetch_array($result)) {
 			$responce[$i] = array (
         'name' => $row['name'],
-        'realmflags' => $row['realmflags'],
+        'flag' => $row['flag'],
 			);
 			$i++;
 		}

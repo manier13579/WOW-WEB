@@ -118,33 +118,14 @@
   <div class="layui-col-md8">
     <div class="layui-tab">
       <ul class="layui-tab-title">
-        <li class="layui-this">装等排行</li>
-        <li>等级排行</li>
+        <li class="layui-this">等级排行</li>
+        <li>装等排行</li>
         <li>当前在线</li>
         <li>公会排行</li>
         <li>专业排行</li>
       </ul>
       <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show" id="show4">
-          <table class="layui-table" lay-skin="line">
-            <colgroup>
-              <col width="180">
-              <col width="150">
-              <col width="130">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th>人物</th>
-                <th>装备等级</th>
-                <th>职业</th>
-                <th>种族</th>
-              </tr> 
-            </thead>
-            <tbody></tbody>
-          </table>   
-        </div>
-        <div class="layui-tab-item" id="show1">
+        <div class="layui-tab-item layui-show" id="show1">
           <table class="layui-table" lay-skin="line">
             <colgroup>
               <col width="150">
@@ -156,6 +137,25 @@
               <tr>
                 <th>人物</th>
                 <th>等级</th>
+                <th>职业</th>
+                <th>种族</th>
+              </tr> 
+            </thead>
+            <tbody></tbody>
+          </table>   
+        </div>
+        <div class="layui-tab-item" id="show4">
+          <table class="layui-table" lay-skin="line">
+            <colgroup>
+              <col width="180">
+              <col width="150">
+              <col width="130">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>人物</th>
+                <th>装备等级</th>
                 <th>职业</th>
                 <th>种族</th>
               </tr> 
@@ -199,7 +199,7 @@
             <tbody></tbody>
           </table>
         </div>
-        <div class="layui-tab-item" id="show4"></>施工中</div>
+        <div class="layui-tab-item" id="show5"></>施工中</div>
       </div>
     </div>
   </div>
@@ -372,11 +372,11 @@ layui.use(['carousel','form'], function(){
         res = JSON.parse(msg);
         html = '';
         for(i=0;i<res.length;i++){
-          if(res[i].realmflags=='2'){
+          if(res[i].flag=='2'){
             html = html + '<div class="stat-left"><i class="layui-icon">&#xe617;</i></div>'+
                           '<div class="stat-right">'+res[i].name+'</div>';
             tip = '离线';
-          }else if(res[i].realmflags=='0'){
+          }else if(res[i].flag=='0'){
             html = html + '<div class="stat-left"><i class="layui-icon statstart">&#xe617;</i></div>'+
                           '<div class="stat-right">'+res[i].name+'</div>';
             tip = '在线';
