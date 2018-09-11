@@ -7,7 +7,7 @@ if (substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1) == 'db.
 //开启数据库连接
 function DbOpen($db_name)
 {
-    $host = 'wjcxxzx.cn';
+    $host = '127.0.0.1';
     $db_user = 'bing';
     $db_pass = '906124';
     $timezone = 'Asia/Beijing';
