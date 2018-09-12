@@ -118,3 +118,14 @@
 .layui-tab {
   margin: 0px 0 !important;
 }
+.layui-table td{
+  padding: 3px 15px !important;
+  font-size:12px;
+  
+}
+.layui-table, .layui-table-view {
+    margin: 0px 0 !important;
+}
+.layui-tab-content {
+    padding: 0 !important;
+}

@@ -32,13 +32,6 @@
           <li class="layui-timeline-item">
             <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
             <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">出生金币1000金</h3>
-              <p>助你轻松过度</p>
-            </div>
-          </li>
-          <li class="layui-timeline-item">
-            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-            <div class="layui-timeline-content layui-text">
               <h3 class="layui-timeline-title">经验倍率20倍！</h3>
               <p>快速升级，一个任务升3级</p>
             </div>
@@ -48,6 +41,13 @@
             <div class="layui-timeline-content layui-text">
               <h3 class="layui-timeline-title">商业技能不愁升</h3>
               <p>黄色、绿色100%涨技能点</p>
+            </div>
+          </li>
+          <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+              <h3 class="layui-timeline-title">出生金币10金</h3>
+              <p>助你轻松过度</p>
             </div>
           </li>
           <li class="layui-timeline-item">
@@ -118,14 +118,35 @@
   <div class="layui-col-md8">
     <div class="layui-tab">
       <ul class="layui-tab-title">
-        <li class="layui-this">等级排行</li>
-        <li>装等排行</li>
+        <li class="layui-this">装等排行</li>
+        <li>等级排行</li>
         <li>当前在线</li>
         <li>公会排行</li>
         <li>专业排行</li>
       </ul>
       <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show" id="show1">
+        <div class="layui-tab-item layui-show" id="show4">
+          <table class="layui-table" lay-skin="line">
+            <colgroup>
+              <col width="130">
+              <col width="110">
+              <col width="110">
+              <col width="110">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>人物</th>
+                <th>装备等级</th>
+                <th>职业</th>
+                <th>种族</th>
+                <th>公会</th>
+              </tr> 
+            </thead>
+            <tbody></tbody>
+          </table>   
+        </div>
+        <div class="layui-tab-item" id="show1">
           <table class="layui-table" lay-skin="line">
             <colgroup>
               <col width="150">
@@ -144,25 +165,7 @@
             <tbody></tbody>
           </table>   
         </div>
-        <div class="layui-tab-item" id="show4">
-          <table class="layui-table" lay-skin="line">
-            <colgroup>
-              <col width="180">
-              <col width="150">
-              <col width="130">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th>人物</th>
-                <th>装备等级</th>
-                <th>职业</th>
-                <th>种族</th>
-              </tr> 
-            </thead>
-            <tbody></tbody>
-          </table>   
-        </div>
+
         <div class="layui-tab-item" id="show2">
           <table class="layui-table" lay-skin="line">
             <colgroup>
@@ -351,14 +354,14 @@ layui.use(['carousel','form'], function(){
         for(i=0;i<res.length;i++){
           res[i].zhiYe = raceClass('class',res[i].zhiYe)
           res[i].zhongZu = raceClass('race',res[i].zhongZu)
-
-          html = html + '<tr><td>'+res[i].name+'</td><td>'+res[i].itemlevel+'</td><td>'+res[i].zhiYe+'</td><td>'+res[i].zhongZu+'</td></tr>';
+          if(res[i].guild=='None'){res[i].guild='无'}
+          html = html + '<tr><td>'+res[i].name+'</td><td>'+res[i].itemlevel+'</td><td>'+res[i].zhiYe+'</td><td>'+res[i].zhongZu+'</td><td>'+res[i].guild+'</td></tr>';
           $('#show4').find('tbody').html(html);
         }
       }
     });
   }
-  //readshow4();
+  readshow4();
 
   function readstat(){
     action = 'showstat';
