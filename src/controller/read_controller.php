@@ -52,7 +52,7 @@ switch ($action){
 	case 'show3' : //读取公会
     
     $sql = "select a.name as name,(select count(*) from guild_member where guildid = a.guildid) as member,c.name as owner from guild a 
-            LEFT JOIN characters c on a.leaderguid = c.guid";
+            LEFT JOIN characters c on a.leaderguid = c.guid limit 0,10";
 		$result = DbSelect($con,$sql) or die("查询失败." . mysqli_error());
     $responce = '';
 		$i = 0;
@@ -71,8 +71,8 @@ switch ($action){
   
 	case 'show4' : //读取装备等级排行
     DbClose($con);
-    $con = DbOpen('cache');
-    $sql = "select * from character_itemlevel order by itemlevel desc";
+    $con = DbOpen('main');
+    $sql = "select * from wow_itemlevel order by itemlevel desc limit 0,10";
 		$result = DbSelect($con,$sql) or die("查询失败." . mysqli_error());
     $responce = '';
 		$i = 0;
@@ -81,7 +81,8 @@ switch ($action){
         'name' => $row['name'],
         'itemlevel' => $row['itemlevel'],
         'zhongZu' => $row['zhongZu'],
-        'zhiYe' => $row['zhiYe']
+        'zhiYe' => $row['zhiYe'],
+        'guild' => $row['guild']
 			);
 			$i++;
 		}
