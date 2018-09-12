@@ -2,10 +2,5 @@
 travian
 test
 travianbf
-<<<<<<< HEAD
 src/common/db.php
 task
-=======
-task
-src/common/db.php
->>>>>>> 065de6966d99a8c2657f309e724df17fa2db08fc
