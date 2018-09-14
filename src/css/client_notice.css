@@ -1,0 +1,13 @@
+.layui-timeline-content{
+  font-size:12px !important;
+}
+.layui-timeline-title{
+  font-size:12px !important;
+  margin-bottom:0px !important;
+}
+.layui-timeline{
+  margin-top:10px;
+}
+.layui-timeline-item{
+  padding-bottom:5px;
+}
