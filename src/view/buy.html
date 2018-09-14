@@ -133,6 +133,23 @@ layui.use(['table','form','element'], function(){
   var table = layui.table;
   
   form.render();
+  getCharacters();
+  function getCharacters(){
+    var action = 'characters';
+    ajax = $.ajax({
+      url:"src/controller/buy_controller.php",
+      async:true,
+      type: 'post',
+      data: {
+        "action":action,
+        "userid":sessionStorage.userid
+      },
+      headers:{"Authorization":access_token},
+      success:function(msg){
+        console.log(msg);
+      }
+    });
+  }
   
   $(".card-left").niceScroll({
     cursorcolor:"#999",

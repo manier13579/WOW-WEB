@@ -64,5 +64,27 @@ case 'buy':
   echo 'ok';
 break;
 
+//获取角色列表
+case 'characters':
+  $userid = $_POST["userid"];
+  $responce = new stdClass();
+  $responce->code = 0;
+  //查找角色列表
+  $sql = "select guid,name from characters where account = '".$userid."'";
+  $con = DbOpen('characters');
+  $result = DbSelect($con, $sql);
+  $i = 0;
+  $res = [];
+  while ($row = mysqli_fetch_array($result)) {
+      $res[$i] = [
+      'guid'  => $row['guid'],
+      'name'  => $row['name']
+    ];
+      $i++;
+  }
+  $responce->data = $res;
+  echo json_encode($responce);
+  DbClose($con);
 
+break;
 }
