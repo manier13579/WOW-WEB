@@ -38,6 +38,36 @@ case 'order':
   DbClose($con);
 break;
 
+//获取角色列表
+case 'characters':
+  $userid = $_POST["userid"];
+  $responce = new stdClass();
+  $responce->code = 0;
+  //查找角色id
+  $sql1 = "select id from account where username = '".$userid."'";
+  $con = DbOpen('auth');
+  $result1 = DbSelect($con, $sql1);
+  $row1 = mysqli_fetch_array($result1);
+  DbClose($con);
+  
+  $sql2 = "select guid,name from characters where account = '".$row1['id']."'";
+  $con = DbOpen('characters');
+  $result2 = DbSelect($con, $sql2);
+  $i = 0;
+  $res = [];
+  while ($row2 = mysqli_fetch_array($result2)) {
+      $res[$i] = [
+      'guid'  => $row2['guid'],
+      'name'  => $row2['name']
+    ];
+      $i++;
+  }
+  $responce->data = $res;
+  echo json_encode($responce);
+  DbClose($con);
+
+break;
+
 //购买商品
 case 'buy':
   $goodinfo = $_POST["goodinfo"];
@@ -48,12 +78,41 @@ case 'buy':
   DbClose($con);
   
   //注册魔兽世界账号
-  $sql2 = "";
   switch ($goodinfo['id']) {
     case '0': 
-      $sql2 = "";
-      $con = DbOpen('realmd');
-      //DbSelect($con, $sql2);
+      $sql2 = "insert into mail (
+        id,
+        messageType,
+        stationery,
+        mailTemplateId,
+        sender,
+        receiver,
+        subject,
+        body,
+        has_items,
+        expire_time,
+        deliver_time,
+        money,
+        cod,
+        checked
+      ) values (
+        unix_timestamp(now()),
+        0,
+        61,
+        284,
+        35133,
+        ".$goodinfo['character'].",
+        '',
+        '1000金币奉上~',
+        0,
+        4102329600,
+        unix_timestamp(now()),
+        10000000,
+        0,
+        0
+      )";
+      $con = DbOpen('characters');
+      DbSelect($con, $sql2);
       DbClose($con);
     break;
     
@@ -64,27 +123,5 @@ case 'buy':
   echo 'ok';
 break;
 
-//获取角色列表
-case 'characters':
-  $userid = $_POST["userid"];
-  $responce = new stdClass();
-  $responce->code = 0;
-  //查找角色列表
-  $sql = "select guid,name from characters where account = '".$userid."'";
-  $con = DbOpen('characters');
-  $result = DbSelect($con, $sql);
-  $i = 0;
-  $res = [];
-  while ($row = mysqli_fetch_array($result)) {
-      $res[$i] = [
-      'guid'  => $row['guid'],
-      'name'  => $row['name']
-    ];
-      $i++;
-  }
-  $responce->data = $res;
-  echo json_encode($responce);
-  DbClose($con);
 
-break;
 }

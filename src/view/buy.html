@@ -131,9 +131,11 @@ layui.use(['table','form','element'], function(){
   var form = layui.form;
   var element = layui.element;
   var table = layui.table;
-  
   form.render();
+  
+  var characters = {};
   getCharacters();
+  //获取角色列表
   function getCharacters(){
     var action = 'characters';
     ajax = $.ajax({
@@ -145,12 +147,17 @@ layui.use(['table','form','element'], function(){
         "userid":sessionStorage.userid
       },
       headers:{"Authorization":access_token},
-      success:function(msg){
-        console.log(msg);
+      success:function(res){
+        var res = JSON.parse(res);
+        if(res.code==0){
+          characters = res.data;
+          initCard(goodinit);
+        }
       }
     });
   }
   
+  //滚动条样式改变
   $(".card-left").niceScroll({
     cursorcolor:"#999",
     cursorwidth:"3px",
@@ -195,11 +202,11 @@ layui.use(['table','form','element'], function(){
       ]],
       done: function(res, curr, count){
         table1Data = res.data;
-        
       }
     }); 
   }
   
+  //左侧服务选择点击事件
   $('.ser-wrap').click(function(){
     if($(this).hasClass('this')){return;}
     $('.ser-wrap').removeClass('this');
@@ -207,7 +214,8 @@ layui.use(['table','form','element'], function(){
     goodinit = $(this).attr('buy');
     initCard(goodinit);
   });
-  initCard(goodinit);
+  
+  //初始化商品列表
   function initCard(good){
     $('.card-left').html("");
     if(goods[good].length>0){
@@ -218,6 +226,7 @@ layui.use(['table','form','element'], function(){
           '<div class="card-wow-logo"></div>'+
           '<div class="card-wow-text">'+goods[good][i].html+'</div></div></div>');
       }
+      //商品点击事件
       $('.card-wow-wrap').click(function(){
         $('.card-wow-wrap').removeClass('card-this');
         $(this).addClass('card-this');
@@ -225,7 +234,12 @@ layui.use(['table','form','element'], function(){
         $('input[name="name"]').val(goods[goodinit][card].name);
         $('.money').text(goods[goodinit][card].money);
         if(goods[goodinit][card].character){
+          $('select[name="character"]').html('');
+          $.each(characters,function(num,item){ 
+            $('select[name="character"]').append("<option value="+item.guid+">"+item.name+"</option>");
+          });
           $('.character-input').show();
+          form.render('select');
         }else{
           $('.character-input').hide();
         }
@@ -253,7 +267,7 @@ layui.use(['table','form','element'], function(){
     data.field.userid = sessionStorage.userid; 
     data.field.id = $('.card-this').attr('card');
     if(goods[goodinit][data.field.id].character && data.field.character == ''){
-      layer.msg('请先创建角色');
+      layer.msg('请选择角色，没有角色请先登录游戏创建角色');
       return false;
     }
     console.log(data.field);

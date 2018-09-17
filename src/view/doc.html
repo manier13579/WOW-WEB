@@ -1,7 +1,8 @@
 <div class="layui-col-md12">
   <div class="layui-card">
-    <div class="layui-card-header">炉石冷却时间修改</div>
+    <div class="layui-card-header">炉石冷却时间修改(不适用于T端)</div>
     <div class="layui-card-body">
+      经试验适用于C、M端，T端炉石施法时间可以改变，但连续使用炉石时还是有冷却时间，每次小退后可变为正常瞬发<br>
       1、关闭服务端mangosd服务，使用dbc编辑器打开spell.dbc<br>
       2、修改id为8690的法术，第31列，180000改为0(冷却时间改为0);第29列，7改为4(施法时间改为1秒)<br>
       3、打开完毕后保存，会在编辑器根目录生成spell_new.dbc(报错忽略，只要确认修改的保存成功即可)，将生成的dbc改名后覆盖源文件<br>
@@ -16,6 +17,37 @@
       2、到gossip_menu表，根据查到的id找到对应的text_id<br>
       3、根据text_id查找npc_text表，找到对话！<br>
       4、根据GossipMenuId查询gossip_menu_option表，找到选项！
+    
+    </div>
+  </div>
+  <div class="layui-card">
+    <div class="layui-card-header">增加商人</div>
+    <div class="layui-card-body">
+      1、在world数据库creature_template表中新建生物模板：
+      <blockquote class="layui-elem-quote layui-quote-nm">
+      id (生物模板id)<br>
+      modelid1 (生物模型id，可参考其他生物模板)<br>
+      name (生物名字)<br>
+      subname (小名)<br>
+      npcflag (NPC类型，128为商人)<br>
+      其他列参照其他生物模型
+      </blockquote>
+      2、在creature表中新建生物实例：
+      <blockquote class="layui-elem-quote layui-quote-nm">
+      guid (递增不能重复)<br>
+      id (刚创建的生物模板id)<br>
+      map (大陆id)<br>
+      position_x/y/z (坐标，可使用gm账号在实地使用.gps命令获取)<br>
+      orientation (NPC朝向，可使用gm账号在实地使用.gps命令获取)<br>
+      其它列参照其他生物实例
+      </blockquote>
+      3、在npc_vendor表里增加生物售卖的物品
+      <blockquote class="layui-elem-quote layui-quote-nm">
+      entry (生物模板id)<br>
+      item (售卖物品id，可参照item_template表)<br>
+      其它列默认0即可
+      </blockquote>
+      4、如需修改商品购买价格，在item_template表中修改BuyPrice
     
     </div>
   </div>
