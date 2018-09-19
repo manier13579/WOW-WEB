@@ -14,7 +14,7 @@ case 'order':
   $responce->code = 0;
 
   $con = DbOpen('main');
-  $sql = "SELECT * from buy where user_id = '".$userid."' order by order_date asc";
+  $sql = "SELECT * from buy where user_id = '".$userid."' order by order_date desc";
   $result = DbSelect($con, $sql);
 
   $i = 0;
@@ -79,6 +79,7 @@ case 'buy':
   
   //注册魔兽世界账号
   switch ($goodinfo['id']) {
+    //WOW充值1000金币
     case '0': 
       $sql2 = "insert into mail (
         id,
@@ -99,10 +100,10 @@ case 'buy':
         unix_timestamp(now()),
         0,
         61,
-        284,
-        35133,
+        0,
+        50006,
         ".$goodinfo['character'].",
-        '',
+        '充值已到账',
         '1000金币奉上~',
         0,
         4102329600,
@@ -115,11 +116,52 @@ case 'buy':
       DbSelect($con, $sql2);
       DbClose($con);
     break;
-    
-    
+    //WOW充值5000金币
+    case '1': 
+      $sql2 = "insert into mail (
+        id,
+        messageType,
+        stationery,
+        mailTemplateId,
+        sender,
+        receiver,
+        subject,
+        body,
+        has_items,
+        expire_time,
+        deliver_time,
+        money,
+        cod,
+        checked
+      ) values (
+        unix_timestamp(now()),
+        0,
+        61,
+        0,
+        50006,
+        ".$goodinfo['character'].",
+        '充值已到账',
+        '5000金币奉上~',
+        0,
+        4102329600,
+        unix_timestamp(now()),
+        50000000,
+        0,
+        0
+      )";
+      $con = DbOpen('characters');
+      DbSelect($con, $sql2);
+      DbClose($con);
+    break;
+    //WOW直升70级
+    case '2': 
+      $sql2 = "update characters set level = 70,xp = 0 where guid = '".$goodinfo['character']."'";
+      $con = DbOpen('characters');
+      DbSelect($con, $sql2);
+      DbClose($con);
+    break;
   }
-
-
+  
   echo 'ok';
 break;
 

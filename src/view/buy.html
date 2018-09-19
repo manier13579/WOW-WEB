@@ -73,7 +73,7 @@
                     </div>
                     <div class="layui-form-item">
                       <label class="layui-form-label">价格</label>
-                      <div class="layui-form-mid layui-word-aux"><span class="money">0.99</span> 元</div>
+                      <div class="layui-form-mid layui-word-aux"><span class="money">0</span> 元</div>
                     </div>
                     <div class="layui-form-item character-input">
                       <label class="layui-form-label">角色</label>
@@ -84,8 +84,8 @@
                     <div class="layui-form-item">
                       <label class="layui-form-label">付款方式</label>
                       <div class="layui-input-block">
-                        <input type="radio" name="pay" lay-filter="pay" value="alipay" title="支付宝" checked>
-                        <input type="radio" name="pay" lay-filter="pay" value="wechat" title="微信">
+                        <input type="radio" name="pay" lay-filter="pay" value="wechat" title="微信" checked>
+                        <input type="radio" name="pay" lay-filter="pay" value="alipay" title="支付宝" >
                       </div>
                     </div>
                     <div class="layui-form-item">
@@ -254,46 +254,53 @@ layui.use(['table','form','element'], function(){
   //付款码切换
   form.on('radio(pay)', function(data){
     if(data.value=='alipay'){
-      $('.payimg').css('background-image','url(src/images/alipay.png)');
+      $('.payimg').css('background-image','url(src/images/alipay.jpg)');
     }else{
-      $('.payimg').css('background-image','url(src/images/黑科技.jpg)');
+      $('.payimg').css('background-image','url(src/images/wxpay.jpg)');
     }
   });  
   
   
   //监听提交
   form.on('submit(submit)', function(data){
-    data.field.good = goodinit;
-    data.field.userid = sessionStorage.userid; 
-    data.field.id = $('.card-this').attr('card');
-    if(goods[goodinit][data.field.id].character && data.field.character == ''){
-      layer.msg('请选择角色，没有角色请先登录游戏创建角色');
-      return false;
-    }
-    console.log(data.field);
-    var action = 'buy';
-    ajax = $.ajax({
-      url:"src/controller/buy_controller.php",
-      async:true,
-      type: 'post',
-      data: {
-        "action":action,
-        "goodinfo":data.field
-      },
-      headers:{"Authorization":access_token},
-      success:function(msg){
-        validate(msg);
-        if(msg=='ok'){
-          layer.msg("购买成功！", {
-            icon: 1,
-            time: 1500
-          }, function(){
-            $('#order').click();
-            initOrderTable();
-          });
+    if(goodinit=='wow'){
+      layer.confirm('请确保充值角色离线时进行充值', {
+        btn: ['我已小退或离线'] //按钮
+      }, function(){
+        data.field.good = goodinit;
+        data.field.userid = sessionStorage.userid; 
+        data.field.id = $('.card-this').attr('card');
+        if(goods[goodinit][data.field.id].character && data.field.character == ''){
+          layer.msg('请选择角色，没有角色请先登录游戏创建角色');
+          return false;
         }
-      }
-    });
+        console.log(data.field);
+        var action = 'buy';
+        ajax = $.ajax({
+          url:"src/controller/buy_controller.php",
+          async:true,
+          type: 'post',
+          data: {
+            "action":action,
+            "goodinfo":data.field
+          },
+          headers:{"Authorization":access_token},
+          success:function(msg){
+            validate(msg);
+            if(msg=='ok'){
+              layer.msg("购买成功！", {
+                icon: 1,
+                time: 1500
+              }, function(){
+                $('#order').click();
+                initOrderTable();
+              });
+            }
+          }
+        });
+      });
+    }
+
     
     return false;
   });
