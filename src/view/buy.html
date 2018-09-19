@@ -265,7 +265,8 @@ layui.use(['table','form','element'], function(){
   form.on('submit(submit)', function(data){
     if(goodinit=='wow'){
       layer.confirm('请确保充值角色离线时进行充值', {
-        btn: ['我已小退或离线'] //按钮
+        btn: ['我已小退或离线'], //按钮
+        closeBtn: 0
       }, function(){
         data.field.good = goodinit;
         data.field.userid = sessionStorage.userid; 
