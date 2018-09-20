@@ -36,7 +36,7 @@ layui.use(['table'], function(){
         {field: 'phone', title: '手机', width:120, align:'center', sort: true,style:"text-align:center;font-size:12px;"},
         {field: 'last_login', title: '最后登录日期', width:150,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
         {field: 'last_ip', title: '最后登录IP', width:120,  sort: true,align:'center',style:"text-align:center;font-size:12px;"},
-        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:100}
+        {fixed: 'right', title:'操作', toolbar: '#barEdit', width:140}
       ]],
       done: function(res, curr, count){
         table1Data = res.data;
@@ -47,15 +47,17 @@ layui.use(['table'], function(){
   //监听行工具事件
   table.on('tool(table1)', function(obj){
     var data = obj.data;
-    console.log(data)
-    if(obj.event === 'del'){
+    if($(this).hasClass('btnDisabled')){
+      return false;
+    }
+    if(obj.event === 'low'){
       layer.confirm('确定取消 '+data.username+' 的权限?', function(index){
         ajax = $.ajax({
           url:"src/controller/audit_controller.php",
           async:true,
           type: 'post',
           data: {
-            "action":"del",
+            "action":"low",
             "userid":data.userid
           },
           headers:{"Authorization":access_token},
@@ -95,6 +97,28 @@ layui.use(['table'], function(){
           }
         }
       });
+    } else if(obj.event === 'del'){
+      layer.confirm('确定删除 '+data.username+' 的账号?', function(index){
+        ajax = $.ajax({
+          url:"src/controller/audit_controller.php",
+          async:true,
+          type: 'post',
+          data: {
+            "action":"del",
+            "userid":data.userid
+          },
+          headers:{"Authorization":access_token},
+          success:function(msg){
+            validate(msg);
+            if(msg=='ok'){
+              layer.msg("删除成功");
+              formShow();
+            }else{
+              layer.msg("失败");
+            }
+          }
+        });
+      });
     }
   });
 });
@@ -102,6 +126,7 @@ layui.use(['table'], function(){
 </script>
 
 <script type="text/html" id="barEdit">
-  <a class="layui-btn layui-btn-xs" lay-event="upgrade">审核</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">除权</a>
+  <a class="layui-btn layui-btn-xs {{# if(d.permission!=0){}}btnDisabled{{#}}}" lay-event="upgrade">审核</a>
+  <a class="layui-btn layui-btn-warm layui-btn-xs {{# if(d.permission==0){}}btnDisabled{{#}}}" lay-event="low" >除权</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs {{# if(d.permission!=0){}}btnDisabled{{#}}}" lay-event="del" >删除</a>
 </script>

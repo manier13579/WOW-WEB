@@ -1,4 +1,8 @@
-<div class="layui-col-md12">
+<link rel="stylesheet" type="text/css" href="src/css/doc.css">
+<div class="layui-col-md3">
+
+</div>
+<div class="layui-col-md9">
   <div class="layui-card">
     <div class="layui-card-header">炉石冷却时间修改(不适用于T端)</div>
     <div class="layui-card-body">
@@ -48,6 +52,38 @@
       其它列默认0即可
       </blockquote>
       4、如需修改商品购买价格，在item_template表中修改BuyPrice
+    
+    </div>
+  </div>
+  <div class="layui-card">
+    <div class="layui-card-header">所有装备属性*2</div>
+    <div class="layui-card-body">
+      在world数据库中执行：
+      <blockquote class="layui-elem-quote layui-quote-nm">
+        update item_template set <br>
+        stat_value1 = stat_value1 * 2 ,<br>
+        stat_value2 = stat_value2 * 2 ,<br>
+        stat_value3 = stat_value3 * 2 ,<br>
+        stat_value4 = stat_value4 * 2 ,<br>
+        stat_value5 = stat_value5 * 2 ,<br>
+        stat_value6 = stat_value6 * 2 ,<br>
+        stat_value7 = stat_value7 * 2 ,<br>
+        stat_value8 = stat_value8 * 2 ,<br>
+        stat_value9 = stat_value9 * 2 ,<br>
+        stat_value10 = stat_value10 * 2 ,<br>
+        armor = armor * 2,<br>
+        dmg_min1 = dmg_min1 * 2,<br>
+        dmg_max1 = dmg_max1 * 2,<br>
+        dmg_min2 = dmg_min2 * 2,<br>
+        dmg_max2 = dmg_max2 * 2,<br>
+        holy_res = holy_res * 2,<br>
+        fire_res = fire_res * 2,<br>
+        nature_res = nature_res * 2,<br>
+        frost_res = frost_res * 2,<br>
+        shadow_res = shadow_res * 2,<br>
+        arcane_res = arcane_res * 2<br>
+        where (class=2 or class=4)
+      </blockquote>
     
     </div>
   </div>

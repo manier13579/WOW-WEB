@@ -1,3 +1,6 @@
 .layui-table-cell{
   padding:0 5px !important;
 }
+.btnDisabled{
+  background-color: #ccc !important;
+}
