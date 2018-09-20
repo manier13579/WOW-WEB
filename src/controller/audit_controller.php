@@ -49,13 +49,21 @@ case 'upgrade':
   DbSelect($con, $sql1);
   DbClose($con);
   
-  //注册魔兽世界账号
-  $sql2 = "replace INTO account (username,sha_pass_hash,expansion,last_login) VALUES ('$userid',SHA1(CONCAT(UPPER('$userid'),':',UPPER('$password'))),'1',now())";
+  //确认是新注册还是已有账号
+  $sql2 = "select count(*) as count from account where username = '".$userid."'";
   $con = DbOpen('auth');
-  DbSelect($con, $sql2);
-  //解除WOW除权事件
-  $sql3 = "delete a from account_banned a LEFT JOIN account b on a.id=b.id where b.username = '".$userid."'";
-  DbSelect($con, $sql3);
+  $result = DbSelect($con, $sql2);
+  $row = mysqli_fetch_array($result);
+  if($row['count']==0){
+    //注册魔兽世界账号
+    $sql3 = "insert INTO account (username,sha_pass_hash,expansion,last_login) VALUES ('$userid',SHA1(CONCAT(UPPER('$userid'),':',UPPER('$password'))),'1',now())";
+    DbSelect($con, $sql3);
+  }else{
+    //解除WOW除权事件
+    $sql4 = "delete a from account_banned a LEFT JOIN account b on a.id=b.id where b.username = '".$userid."'";
+    DbSelect($con, $sql4);
+  }
+  
   DbClose($con);
   echo 'ok';
 break;
@@ -63,11 +71,13 @@ break;
 //注册除权事件
 case 'low':
   $userid = $_POST['userid'];  //获取userid
+  //网页除权
   $sql1 = "update user set permission = '0' where user_id = '".$userid."'";
   $con = DbOpen('main');
   DbSelect($con, $sql1);
   DbClose($con);
   
+  //WOW除权
   $sql2 = "insert into account_banned values(
     (select id from account where username = '".$userid."'),
     unix_timestamp(now()),
@@ -86,11 +96,14 @@ break;
 //注册删除事件
 case 'del':
   $userid = $_POST['userid'];  //获取userid
+  
+  //网页删除
   $sql1 = "delete from user where user_id = '".$userid."'";
   $con = DbOpen('main');
   DbSelect($con, $sql1);
   DbClose($con);
   
+  //WOW删除
   $sql2 = "
     delete a from account_banned a LEFT JOIN account b on a.id=b.id where b.username = '".$userid."';
     delete from account where username = '".$userid."';
