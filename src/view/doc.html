@@ -1,94 +1,149 @@
 <link rel="stylesheet" type="text/css" href="src/css/doc.css">
+<div class="doc-top">
+  <i class="layui-icon layui-icon-top"></i>   
+</div>
 <div class="layui-col-md3">
-
+  <div class="doc-nav-wrap">
+    <div class="doc-nav-title">
+      <blockquote class="layui-elem-quote">文档目录</blockquote>
+    </div>
+  </div>
 </div>
 <div class="layui-col-md9">
-  <div class="layui-card">
-    <div class="layui-card-header">炉石冷却时间修改(不适用于T端)</div>
-    <div class="layui-card-body">
-      经试验适用于C、M端，T端炉石施法时间可以改变，但连续使用炉石时还是有冷却时间，每次小退后可变为正常瞬发<br>
-      1、关闭服务端mangosd服务，使用dbc编辑器打开spell.dbc<br>
-      2、修改id为8690的法术，第31列，180000改为0(冷却时间改为0);第29列，7改为4(施法时间改为1秒)<br>
-      3、打开完毕后保存，会在编辑器根目录生成spell_new.dbc(报错忽略，只要确认修改的保存成功即可)，将生成的dbc改名后覆盖源文件<br>
-      4、打开mangosd服务，客户端清除缓存(删除cache文件夹)，完成
-    
-    </div>
-  </div>
-  <div class="layui-card">
-    <div class="layui-card-header">人物对话、及对话中的选项翻译</div>
-    <div class="layui-card-body">
-      1、先根据人物名字在creature_template表查到这个人物的GossipMenuId<br>
-      2、到gossip_menu表，根据查到的id找到对应的text_id<br>
-      3、根据text_id查找npc_text表，找到对话！<br>
-      4、根据GossipMenuId查询gossip_menu_option表，找到选项！
-    
-    </div>
-  </div>
-  <div class="layui-card">
-    <div class="layui-card-header">增加商人</div>
-    <div class="layui-card-body">
-      1、在world数据库creature_template表中新建生物模板：
-      <blockquote class="layui-elem-quote layui-quote-nm">
-      id (生物模板id)<br>
-      modelid1 (生物模型id，可参考其他生物模板)<br>
-      name (生物名字)<br>
-      subname (小名)<br>
-      npcflag (NPC类型，128为商人)<br>
-      其他列参照其他生物模型
-      </blockquote>
-      2、在creature表中新建生物实例：
-      <blockquote class="layui-elem-quote layui-quote-nm">
-      guid (递增不能重复)<br>
-      id (刚创建的生物模板id)<br>
-      map (大陆id)<br>
-      position_x/y/z (坐标，可使用gm账号在实地使用.gps命令获取)<br>
-      orientation (NPC朝向，可使用gm账号在实地使用.gps命令获取)<br>
-      其它列参照其他生物实例
-      </blockquote>
-      3、在npc_vendor表里增加生物售卖的物品
-      <blockquote class="layui-elem-quote layui-quote-nm">
-      entry (生物模板id)<br>
-      item (售卖物品id，可参照item_template表)<br>
-      其它列默认0即可
-      </blockquote>
-      4、如需修改商品购买价格，在item_template表中修改BuyPrice
-    
-    </div>
-  </div>
-  <div class="layui-card">
-    <div class="layui-card-header">所有装备属性*2</div>
-    <div class="layui-card-body">
-      在world数据库中执行：
-      <blockquote class="layui-elem-quote layui-quote-nm">
-        update item_template set <br>
-        stat_value1 = stat_value1 * 2 ,<br>
-        stat_value2 = stat_value2 * 2 ,<br>
-        stat_value3 = stat_value3 * 2 ,<br>
-        stat_value4 = stat_value4 * 2 ,<br>
-        stat_value5 = stat_value5 * 2 ,<br>
-        stat_value6 = stat_value6 * 2 ,<br>
-        stat_value7 = stat_value7 * 2 ,<br>
-        stat_value8 = stat_value8 * 2 ,<br>
-        stat_value9 = stat_value9 * 2 ,<br>
-        stat_value10 = stat_value10 * 2 ,<br>
-        armor = armor * 2,<br>
-        dmg_min1 = dmg_min1 * 2,<br>
-        dmg_max1 = dmg_max1 * 2,<br>
-        dmg_min2 = dmg_min2 * 2,<br>
-        dmg_max2 = dmg_max2 * 2,<br>
-        holy_res = holy_res * 2,<br>
-        fire_res = fire_res * 2,<br>
-        nature_res = nature_res * 2,<br>
-        frost_res = frost_res * 2,<br>
-        shadow_res = shadow_res * 2,<br>
-        arcane_res = arcane_res * 2<br>
-        where (class=2 or class=4)
-      </blockquote>
-    
-    </div>
-  </div>
+  <ul class="layui-timeline">
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">炉石冷却时间修改</h3>
+          <blockquote class="layui-elem-quote">经实验在C、M端无需打补丁；在T端炉石施法时间可以改变，但连续使用炉石时还是有冷却时间，每次小退后可变为正常瞬发，需要打补丁</blockquote>
+          1、关闭服务端程序，使用dbc编辑器打开spell.dbc<br>
+          2、修改id为8690的法术，第31列，180000改为0(冷却时间改为0);第29列，7改为4(施法时间改为1秒)<br>
+          3、打开完毕后保存，将生成的dbc覆盖源文件<br>
+          4、打开服务端程序，客户端清除缓存(删除cache文件夹)，C、M端完成<br>
+          5、使用打包工具将Spell.dbc打包成MPQ文件，放到客户端的Data/zhCN(zhTW)/patch-zhCN-X.MPQ(X按顺序写)，T端完成
+      </div>
+    </li>
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">人物对话、及对话中的选项修改</h3>
+          1、先根据人物名字在creature_template表查到这个人物的GossipMenuId<br>
+          2、到gossip_menu表，根据查到的id找到对应的text_id<br>
+          3、根据text_id查找npc_text表，找到对话！<br>
+          4、根据GossipMenuId查询gossip_menu_option表，找到选项！
+      </div>
+    </li>
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">增加商人</h3>
+          1、在world数据库creature_template表中新建生物模板：
+          <blockquote class="layui-elem-quote layui-quote-nm">
+          id (生物模板id)<br>
+          modelid1 (生物模型id，可参考其他生物模板)<br>
+          name (生物名字)<br>
+          subname (小名)<br>
+          npcflag (NPC类型，128为商人)<br>
+          其他列参照其他生物模型
+          </blockquote>
+          2、在creature表中新建生物实例：
+          <blockquote class="layui-elem-quote layui-quote-nm">
+          guid (递增不能重复)<br>
+          id (刚创建的生物模板id)<br>
+          map (大陆id)<br>
+          position_x/y/z (坐标，可使用gm账号在实地使用.gps命令获取)<br>
+          orientation (NPC朝向，可使用gm账号在实地使用.gps命令获取)<br>
+          其它列参照其他生物实例
+          </blockquote>
+          3、在npc_vendor表里增加生物售卖的物品
+          <blockquote class="layui-elem-quote layui-quote-nm">
+          entry (生物模板id)<br>
+          item (售卖物品id，可参照item_template表)<br>
+          其它列默认0即可
+          </blockquote>
+          4、如需修改商品购买价格，在item_template表中修改BuyPrice
+      </div>
+    </li>
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">装备属性修改</h3>
+          <blockquote class="layui-elem-quote">将修改装备属性 (力敏耐智精、暴击、急速等)、护甲、武器攻击、法术抗性的值为原来的2倍。<br>装备提供的攻击强度和法术强度需要修改Spell.dbc，数据库无法修改</blockquote>
+          在world数据库中执行：
+          <blockquote class="layui-elem-quote layui-quote-nm">
+            update item_template set <br>
+            stat_value1 = stat_value1 * 2 ,stat_value2 = stat_value2 * 2 ,<br>
+            stat_value3 = stat_value3 * 2 ,stat_value4 = stat_value4 * 2 ,<br>
+            stat_value5 = stat_value5 * 2 ,stat_value6 = stat_value6 * 2 ,<br>
+            stat_value7 = stat_value7 * 2 ,stat_value8 = stat_value8 * 2 ,<br>
+            stat_value9 = stat_value9 * 2 ,stat_value10 = stat_value10 * 2 ,<br>
+            armor = armor * 2,<br>
+            dmg_min1 = dmg_min1 * 2,dmg_max1 = dmg_max1 * 2,<br>
+            dmg_min2 = dmg_min2 * 2,dmg_max2 = dmg_max2 * 2,<br>
+            holy_res = holy_res * 2,fire_res = fire_res * 2,<br>
+            nature_res = nature_res * 2,frost_res = frost_res * 2,<br>
+            shadow_res = shadow_res * 2,arcane_res = arcane_res * 2<br>
+            where (class=2 or class=4)
+          </blockquote>
+      </div>
+    </li>
+    <li class="layui-timeline-item">
+      <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+      <div class="layui-timeline-content layui-text">
+        <h3 class="layui-timeline-title">法术修改-Spell.dbc</h3>
+          <blockquote class="layui-elem-quote">以修改装备提供的法术强度为例<br>需要使用到QSW、MyDbcEditor、MPQEditor这三个工具</blockquote>
+          1、使用QSW查看器，查看法术信息
+          
+          <blockquote class="layui-elem-quote layui-quote-nm">
+            在Settings中配置MPQ目录为WOW客户端目录下的Data文件夹，DBC目录填写DBFilesClient<br>
+            在Search中搜索需要修改的Spell的id或名称，例如搜索"Increase Spell Dam"会出来所有提高法术伤害的法术<br>
+            将要修改的法术ID和法术伤害拼接成MyDbcEditor可以批量导入的dbc补丁字符串，例如要把id为35844(法术强度提高959点)的这个法术伤害提高2倍，字符串写为："35844:80=1918,81=1918"<br>
+            这样把所有要修改的法术都写成字符串，保存为txt，内容示例：<br>
+            <blockquote class="layui-elem-quote layui-quote-nm">
+              ;IdColumnIndex=0<br>
+              35844:80=1918,81=1918<br>
+              35855:80=1908,81=1908<br>
+              35835:80=1868,81=1868<br>
+              35902:80=1814,81=1814<br>
+              24243:80=1680,81=1680
+            </blockquote>
+          </blockquote>
+          2、使用MyDbcEditor，应用txt补丁，修改Spell.dbc
+          <blockquote class="layui-elem-quote layui-quote-nm">
+            使用MyDbcEditor打开服务端目录下的dbc/Spell.dbc<br>
+            点击菜单栏的File - Apply Patch选择刚刚编辑好的补丁txt，应用补丁<br>确认一下法术是否改好，之后保存，此时Spell.dbc已修改完毕，替换服务端原来的Spell.dbc文件
+          </blockquote>
+          3、使用MPQEditor制作客户端补丁
+          <blockquote class="layui-elem-quote layui-quote-nm">
+            使用MPQEditor新建一个MPQ文件，文件名可以先随意写，创建空白MPQ，兼容性选WOW的版本，其它默认<br>
+            在建好的MPQ中右键新建文件夹，起名为"DBFilesClient"<br>
+            在DBFilesClient文件夹中右键添加文件，选择上一步中修改好的Spell.dbc，此时MPQ补丁文件压制完毕<br>
+            将生成好的MPQ文件放入客户端Data/zhCN(或zhTW) 文件夹下，修改文件名为patch-zhCN-X.MPQ (X按现有补丁号+1填写)
+          </blockquote>
+          重启服务端、客户端最好清一下缓存(删除cache文件夹)，修改完毕
+      </div>
+    </li>
+  </ul>
+
 </div>
 
 <script>
+getTitle();
+function getTitle(){
+  $('.layui-timeline-title').each(function(index){
+    $('.doc-nav-wrap').append('<div class="doc-nav" index="'+index+'">'+$(this).html()+'</div>');
+  });
+}
 
+$('.doc-nav').click(function(){
+  var index = $(this).attr('index');;
+  $('.layui-timeline-title')[index].scrollIntoView();
+  var t = $(window).scrollTop();
+  $('body,html').animate({'scrollTop':t-60},0)
+});
+
+
+$('.doc-top').click(function(){
+  $('html,body').animate({scrollTop:0},200);
+});
 </script>

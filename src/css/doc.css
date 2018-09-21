@@ -1,10 +1,43 @@
-.layui-card-header{
-  font-weight:800;
-  color:#01AAED;
-}
 .wrap{
   width:100% !important;
 }
 .container {
   width: 100% !important;
+}
+.layui-elem-quote{
+  padding:8px 20px !important;
+  margin:8px 0px !important;
+}
+.doc-nav-wrap{
+  position:fixed;
+}
+.doc-nav{
+  cursor:pointer;
+  padding:5px;
+  font-size:13px;
+  margin-left:20px;
+  color:#555;
+}
+.doc-nav-title{
+  
+}
+.doc-top{
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 999999;
+
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #9F9F9F;
+  color: #fff;
+  border-radius: 2px;
+  opacity: .95;
+  padding:0px !important;
+}
+.doc-top i{
+  font-size:35px;
 }
