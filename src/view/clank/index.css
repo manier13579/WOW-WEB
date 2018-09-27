@@ -1,0 +1,414 @@
+.wrap{
+  width:1200px !important;
+}
+.container {
+  width: 1200px !important;
+}
+*{
+  box-sizing:border-box;
+}
+body{
+  background-color:#ddd;
+}
+@font-face {font-family: 'iconfont';
+  src: url('font/iconfont.eot');
+  src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+  url('font/iconfont.woff') format('woff'),
+  url('font/iconfont.ttf') format('truetype'),
+  url('font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.game-wrap{
+  width:100%;
+  height:716px;
+  background-color:#fff;
+  padding:8px 0 !important;
+}
+.game-left{
+  float:left;
+  width:70%;
+  height:100%;
+}
+.game-right{
+  float:left;
+  width:30%;
+  height:100%;
+}
+/*地城卡牌*/
+.syscard-wrap{
+  height:100px;
+  background-color:#393D49;
+}
+.syscard-all{
+  height:90px;
+  width:60px;
+  margin:5px 0px 5px 10px;
+  float:left;
+  background-color:#ddd;
+}
+.syscard-change{
+  width:470px;
+  padding-left:25px;
+  float:left;
+}
+.syscard-stay{
+  width:290px;
+  float:left;
+}
+.syscard{
+  height:90px;
+  width:60px;
+  margin:5px 0px 5px 10px;
+  float:left;
+  background-color:#ddd;
+}
+.syscard-title{
+  position:absolute;
+  width:20px;
+  left:89px;
+  top:24px;
+  color: white; 
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-size:12px;
+}
+.syscard-title2{
+  position:absolute;
+  width:20px;
+  left:534px;
+  top:24px;
+  color: white; 
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-size:12px;
+}
+/*地图*/
+.game-map{
+  background-color:#888;
+  height:500px;
+}
+/*手牌*/
+.handcard-wrap{
+  height:100px;
+  border-bottom:1px solid #000;
+  background-color:#393D49;
+}
+.handcard-all{
+  height:90px;
+  width:60px;
+  margin:5px 0px 5px 10px;
+  float:left;
+  background-color:#ddd;
+}
+.handcard-change{
+  width:470px;
+  padding-left:25px;
+  float:left;
+}
+.handcard{
+  height:90px;
+  width:60px;
+  margin:5px 0px 5px 10px;
+  float:left;
+  background-color:#ddd;
+}
+.handcard-title{
+  position:absolute;
+  width:20px;
+  left:89px;
+  top:642px;
+  color: white; 
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-size:12px;
+}
+
+/*卡牌*/
+.card{
+  position:relative;
+}
+.card-title{
+  width:100%;
+  height:17px;
+  font-size:12px;
+  text-align:center;
+  color:#fff;
+}
+.card1 .card-title{
+  background-color:#555;
+}
+.card2 .card-title{
+  background-color:#1E9FFF;
+}
+.card3 .card-title{
+  background-color:#FF5722;
+}
+.card4 .card-title{
+  background-color:#1E9FFF;
+}
+.card5 .card-title{
+  background-color:#8B008B;
+}
+.card6 .card-title{
+  background-color:#1E9FFF;
+}
+.card7 .card-title{
+  background-color:#FF9900;
+}
+.card-title2{
+  height:15px;
+  font-size:10px;
+  text-align:center;
+  color:#fff;
+  position:absolute;
+  background-color:#000;
+  padding:0px 3px;
+  right:0px;
+}
+.card-img{
+  height:60px;
+  background-size:100%;
+}
+.card-bottom{
+  background-color:#000;
+  height:13px;
+  width:100%;
+}
+.cost3{
+  float:right;
+  color:#fff;
+  width:13px;
+  height:13px;
+  font-size:10px;
+  padding:1px;
+  background-color:#C5420B;
+  margin-left:2px;
+}
+.cost1{
+  float:right;
+  color:#fff;
+  width:13px;
+  height:13px;
+  background-color:#518BB6;
+  font-size:11px;
+  margin-left:2px;
+  text-align:center;
+}
+.card-left{
+  position:absolute;
+  left:0px;
+}
+.reward1{
+  color:#fff;
+  width:13px;
+  height:13px;
+  background-color:#518BB6;
+  font-size:11px;
+  text-align:center;
+  margin-bottom:2px;
+}
+.reward2{
+  color:#fff;
+  width:13px;
+  height:13px;
+  font-size:10px;
+  padding:1px;
+  background-color:#DAA520;
+  margin-bottom:2px;
+}
+.reward3{
+  color:#fff;
+  width:13px;
+  height:13px;
+  font-size:10px;
+  padding:1px;
+  background-color:#C5420B;
+  margin-bottom:2px;
+}
+
+
+/*巨龙攻击区*/
+.token-wrap{
+  height:100px;
+  background-color:#2F4056;
+  padding:5px;
+  position:relative;
+}
+.clank{
+  width:40%;
+  height:90px;
+  background-color:#93A9BF;
+  float:left;
+}
+.clank-text{
+  position:absolute;
+  left:52px;
+  top:43px;
+  color:#fff;
+  font-size:13px;
+}
+.level-left{
+  float:left;
+  font-size:45px;
+  color:#fff;
+  width:60px;
+  text-align:center;
+  padding-top:15px;
+  padding-left:5px;
+}
+
+.level{
+  width:28px;
+  height:40px;
+  float:left;
+  text-align:center;
+  font-size:16px;
+  color:#ddd;
+  line-height:40px;
+  background-color:#888;
+  margin:3 4;
+}
+.level-jiantou{
+  color:#ddd;
+  font-size:24px;
+  position:absolute;
+  left:312px;
+  top:52px;
+}
+.current{
+  color:#FF5722 !important;
+  background-color:#ddd !important;
+}
+.player-wrap{
+  height:115px;
+  background-color:#393D49;
+  padding:5px;
+  position:relative;
+  border-bottom:1px solid #888;
+}
+.wrap2{
+  background-color:#2F4056 !important;
+}
+.player-title{
+  float:left;
+  width:20px;
+  text-align:center;
+  height:100%;
+  color:#fff;
+  font-size:12px;
+  padding-right:5px;
+  border-right:1px solid #888;
+}
+.player-middle{
+  float:left;
+  padding-left:40px;
+  width:245px;
+  border-right:1px solid #888;
+}
+.block{
+  float:left;
+  width:12px;
+  height:12px;
+  margin-right:1px;
+  background-color:#ddd;
+}
+.player-health,
+.player-s,
+.player-m,
+.player-a{
+  margin-top:5px;
+}
+.player-icon1{
+  position:absolute;
+  width:12px;
+  height:12px;
+  color:#FF5722;
+  font-size:13px;
+  text-align:center;
+  left:40px;
+  top:9px;
+}
+
+.player-icon2{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background-color:#518BB6;
+  color:#fff;
+  font-size:11px;
+  text-align:center;
+  left:40px;
+  top:27px;
+}
+.player-icon3{
+  position:absolute;
+  width:12px;
+  height:12px;
+  color:#fff;
+  font-size:10px;
+  text-align:center;
+  background-color:#DAA520;
+  left:40px;
+  top:44px;
+}
+
+.player-icon4{
+  position:absolute;
+  width:12px;
+  height:12px;
+  color:#fff;
+  font-size:10px;
+  text-align:center;
+  background-color:#C5420B;
+  left:40px;
+  top:61px;
+}
+.player-mb{
+  margin-top:10px;
+}
+.mblock{
+  float:left;
+  width:25px;
+  height:25px;
+  margin-right:5px;
+  background-color:#ddd;
+}
+.player-text5{
+  position:absolute;
+  left:35px;
+  top:87px;
+  font-size:12px;
+  color:#ddd;
+}
+.player-right{
+  padding-left:10px;
+  padding-top:5px;
+}
+.dblock{
+  float:left;
+  width:30px;
+  height:30px;
+  margin-right:5px;
+  margin-bottom:5px;
+  background-color:#ddd;
+}
+.player-gold{
+  position:absolute;
+  right:12px;
+  top:87px;
+}
+.gold-title{
+  float:left;
+  color:#ddd;
+  font-size:12px;
+}
+.gold-text{
+  float:left;
+  padding-left:5px;
+  color:#FF9900;
+  font-weight:800;
+  font-size:13px;
+}
