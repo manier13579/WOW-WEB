@@ -412,3 +412,81 @@ body{
   font-weight:800;
   font-size:13px;
 }
+.event{
+  height:140px;
+  background-color:#aaa;
+}
+.player-stat1{
+  height:100%;
+  padding:35 0 0 45;
+  font-size:12px;
+  color:#ddd;
+  position:relative;
+}
+.player-stat2{
+  height:100%;
+  color:#ddd;
+  padding:35 0 0 45;
+  font-size:12px;
+  position:relative;
+}
+.readyBtn3{
+  position:absolute;
+  padding:8px 10px;
+  color:#fff;
+  cursor:pointer;
+  background-color:#5FB878;
+}
+.readyBtn2{
+  position:absolute;
+  padding:8px 10px;
+  color:#fff;
+  background-color:#888;
+}
+.readyBtn{
+  position:absolute;
+  padding:8px 10px;
+  color:#fff;
+  background-color:#1E9FFF;
+  cursor:pointer;
+}
+.h{
+  background-color:#FF5722 !important;
+}
+.s{
+  background-color:#518BB6 !important;
+}
+.m{
+  background-color:#DAA520 !important;
+}
+.a{
+  background-color:#C5420B !important;
+}
+.event-msg{
+  height:110px;
+}
+.event-bottom{
+  height:30px;
+  background-color:#555;
+}
+.event-input{
+  float:left;
+  width:220px;
+  height:100%;
+}
+.event-submit{
+  float:left;
+  width:60px;
+  height:100%;
+}
+.event-exit{
+  float:left;
+  width:76px;
+  height:100%;
+  background-color:#009688;
+  color:#fff;
+  text-align:center;
+  line-height:30px;
+  font-size:12px;
+  cursor:pointer;
+}
