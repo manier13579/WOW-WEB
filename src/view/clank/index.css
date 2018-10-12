@@ -58,6 +58,7 @@ body{
   float:left;
 }
 .syscard-stay{
+  position:relative;
   width:290px;
   float:left;
 }
@@ -489,4 +490,53 @@ body{
   line-height:30px;
   font-size:12px;
   cursor:pointer;
+}
+.all-title{
+  font-size:12px;
+  line-height:45px;
+  text-align:center;
+  color:#fff;
+  background-color:#009688;
+}
+.all-text{
+  font-size:12px;
+  text-align:center;
+  line-height:22px;
+}
+.all-count{
+  font-size:13px;
+  text-align:center;
+}
+.count7{
+  position:absolute;
+  left:10px;
+  top:82px;
+  color:#fff;
+  width: 13px;
+  background-color: #5FB878;
+  text-align: center;
+  height: 13px;
+  font-size:11px;
+}
+.count8{
+  position:absolute;
+  left:80px;
+  top:82px;
+  color:#fff;
+  width: 13px;
+  background-color: #5FB878;
+  text-align: center;
+  height: 13px;
+  font-size:11px;
+}
+.count9{
+  position:absolute;
+  left:150px;
+  top:82px;
+  color:#fff;
+  width: 13px;
+  background-color: #5FB878;
+  text-align: center;
+  height: 13px;
+  font-size:11px;
 }

@@ -4,7 +4,11 @@
   <div class="game-left">
     <div class="syscard-wrap">
       <div class="syscard-title">地城卡牌</div>
-      <div class="syscard-all"></div>
+      <div class="syscard-all">
+        <div class="all-title">地城牌库</div>
+        <div class="all-text">剩余卡牌</div>
+        <div class="all-count"><span class="layui-badge layui-bg-black">0</span></div>
+      </div>
       <div class="syscard-change">
         <div class="syscard" index="1"></div>
         <div class="syscard" index="2"></div>
@@ -19,6 +23,9 @@
         <div class="syscard" index="8"></div>
         <div class="syscard" index="9"></div>
         <div class="syscard" index="10"></div>
+        <div class="count7">0</div>
+        <div class="count8">0</div>
+        <div class="count9">0</div>
       </div>
     </div>
     <div class="game-map">
@@ -27,14 +34,12 @@
     </div>
     <div class="handcard-wrap">
       <div class="handcard-title">手牌</div>
-      <div class="handcard-all"></div>
-      <div class="handcard-change">
-        <div class="handcard"></div>
-        <div class="handcard"></div>
-        <div class="handcard"></div>
-        <div class="handcard"></div>
-        <div class="handcard"></div>
+      <div class="handcard-all">
+        <div class="all-title">手牌牌库</div>
+        <div class="all-text">剩余卡牌</div>
+        <div class="all-count"><span class="layui-badge layui-bg-black">0</span></div>
       </div>
+      <div class="handcard-change"></div>
     </div>
   </div>
 
@@ -47,7 +52,7 @@
       <div class="level-right">
         <div class="level" level="1">2</div>
         <div class="level" level="2">2</div>
-        <div class="level current" level="3">3</div>
+        <div class="level" level="3">3</div>
         <div class="level" level="4">3</div>
         <div class="level" level="7">5</div>
         <div class="level" level="6">4</div>
@@ -233,12 +238,12 @@ function initGame(){
   },1000);
 }
 
-//主循环
+//主入口
 function main(){
   //停止房间刷新
   window.clearInterval(refRoom);
   //初始化玩家面板
-  $('.player-stat1').text('');
+  $('.player-stat1').hide();
   Object.keys(players).forEach(function(player){
     $('.player-wrap[index='+players[player].uid+']').find('.player-stat2').hide();
     $('.player-wrap[index='+players[player].uid+']').find('.player-stat3').show();
@@ -252,6 +257,77 @@ function main(){
     
   });
   
+  sysinit();  //更新地城卡牌
+  handinit();  //更新手牌
+  
+}
+
+//更新手牌
+function handinit(){
+  ajax = $.ajax({
+    url:"src/view/clank/controller/init.php",
+    async:false,
+    type: 'post',
+    dataType:'json',
+    data: {
+      "action":"handInit",
+      "userid":userid
+    },
+    success:function(res){
+      //更新手牌
+      console.log(res);
+      var handcard = JSON.parse(res.card);
+      var handcardcur = JSON.parse(res.cardcur);
+      initSyscard(0,handcardcur[0],'hand');
+      initSyscard(0,handcardcur[1],'hand');
+      initSyscard(0,handcardcur[2],'hand');
+      initSyscard(0,handcardcur[3],'hand');
+      initSyscard(0,handcardcur[4],'hand');
+      //更新手牌剩余卡牌数
+      $('.handcard-all').find('.all-count').find('span').text(res.cardnum - res.cardcurnum);
+      //更新玩家数值
+      healthChange(res.health,userid);
+      skillChange(res.skill,userid);
+      moveChange(res.move,userid);
+      attackChange(res.attack,userid);
+      itemChange([],userid);
+      
+    }
+  });
+}
+
+//更新游戏进度等状态(地城卡牌、巨龙攻击级别等)
+function sysinit(){
+  ajax = $.ajax({
+    url:"src/view/clank/controller/init.php",
+    async:false,
+    type: 'post',
+    dataType:'json',
+    data: {"action":"sysInit"},
+    success:function(res){
+      //更新地城卡牌
+      var cardcur = JSON.parse(res.cardcur);
+      initSyscard(1,cardcur[0],'sys');
+      initSyscard(2,cardcur[1],'sys');
+      initSyscard(3,cardcur[2],'sys');
+      initSyscard(4,cardcur[3],'sys');
+      initSyscard(5,cardcur[4],'sys');
+      initSyscard(6,cardcur[5],'sys');
+      //更新常驻卡牌
+      initSyscard(7,20,'sys');
+      initSyscard(8,19,'sys');
+      initSyscard(9,9,'sys');
+      initSyscard(10,74,'sys');
+      //更新地城牌库剩余卡牌数
+      $('.syscard-all').find('.all-count').find('span').text(res.cardcount);
+      //更新常驻卡牌剩余卡牌数
+      $('.count7').text(res.stay1);
+      $('.count8').text(res.stay2);
+      $('.count9').text(res.stay3);
+      //更新巨龙攻击等级
+      $('.level[level="'+res.level+'"]').addClass('current');
+    }
+  });
 }
 
 //改变玩家血量
@@ -325,6 +401,7 @@ function getCard(){
     url:"src/view/clank/controller/init.php",
     async:false,
     type: 'post',
+    dataType:'text',
     data: {"action":"getCard"},
     success:function(res){
       cards = JSON.parse(res);
@@ -334,11 +411,12 @@ function getCard(){
 
 //房间状态刷新
 function roomStatRef(){
-  //先查询现有玩家
+  //先查询游戏状态
   ajax = $.ajax({
     url:"src/view/clank/controller/init.php",
     async:false,
     type: 'post',
+    dataType:'text',
     data: {"action":"gamestat"},
     success:function(res){
       var run = res;
@@ -347,9 +425,9 @@ function roomStatRef(){
         url:"src/view/clank/controller/init.php",
         async:false,
         type: 'post',
+        dataType:'json',
         data: {"action":"roomstat"},
         success:function(res){
-          res = JSON.parse(res);
           players = {};
           for(i=1;i<5;i++){
             var pui = $('.player-wrap[index='+i+']');
@@ -360,6 +438,7 @@ function roomStatRef(){
               pui.find('.player-title').text(res[i].username);
               pui.find('.player-stat1').hide();
               pui.find('.player-stat2').show();
+              pui.find('.player-stat3').hide();
               
               if(res[i].userid==userid){
                 pui.find('.readyBtn2').hide();
@@ -372,6 +451,7 @@ function roomStatRef(){
               pui.find('.player-title').text('');
               pui.find('.player-stat1').show();
               pui.find('.player-stat2').hide();
+              pui.find('.player-stat3').hide();
             }
           }
           if(run==1){main();}
@@ -385,14 +465,11 @@ function roomStatRef(){
 
 }
 
-
-//initSyscard(7,20);
-//initSyscard(8,19);
-//initSyscard(9,9);
-//initSyscard(10,74);
-//初始化地城卡牌
-function initSyscard(index,id){
-  var curCard = $('.syscard[index="'+index+'"]');
+//初始化地城卡牌(位置，卡牌id，地城卡牌:sys或手牌:hand)
+function initSyscard(index,id,type){
+  if(type=="sys"){
+    var curCard = $('.syscard[index="'+index+'"]');
+  }
   //判断副标题
   if(cards[id].type==3){
     title2html = '<div class="card-title2">怪物</div>';
@@ -454,14 +531,29 @@ function initSyscard(index,id){
     costhtml += '<div class="cost1"><div>'+cards[id].cost+'</div></div>';
   }
   
-  curCard.html(
-    '<div class="card card'+cards[id].type+'" cardid='+id+'>'+
-      '<div class="card-title">'+cards[id].name+'</div>'+title2html+
-      '<div class="card-left">'+rewardhtml+
-      '</div>'+
-      '<div class="card-img" style="background-image:url(src/view/clank/images/20.png);"></div>'+
-      '<div class="card-bottom">'+costhtml+
-      '</div></div>');
+  if(type=='sys'){
+    curCard.html(
+      '<div class="card card'+cards[id].type+'" cardid='+id+'>'+
+        '<div class="card-title">'+cards[id].name+'</div>'+title2html+
+        '<div class="card-left">'+rewardhtml+
+        '</div>'+
+        '<div class="card-img" style="background-image:url(src/view/clank/images/20.png);"></div>'+
+        '<div class="card-bottom">'+costhtml+
+        '</div></div>'
+    );
+  }else{
+    $('.handcard-change').append(
+      '<div class="handcard"><div class="card card'+cards[id].type+'" cardid='+id+'>'+
+        '<div class="card-title">'+cards[id].name+'</div>'+title2html+
+        '<div class="card-left">'+rewardhtml+
+        '</div>'+
+        '<div class="card-img" style="background-image:url(src/view/clank/images/20.png);"></div>'+
+        '<div class="card-bottom">'+costhtml+
+        '</div></div></div>'
+    );
+  
+  }
+
   
 }
 
@@ -497,15 +589,14 @@ $('.readyBtn3').click(function(){
       async:false,
       type: 'post',
       data: {
-        "action":"begin",
-        "seatid":seatid,
-        "userid":userid,
-        "username":sessionStorage.username
+        "action":"begin"
       },
       success:function(res){
-        if(res == 'ok'){
+        if(res == 1){
           console.log('游戏开始');
           main();
+        }else{
+          console.log('游戏开始失败');
         }
       }
     });
@@ -514,8 +605,26 @@ $('.readyBtn3').click(function(){
 
 //游戏结束事件
 $('.event-exit').click(function(){
-
-
+  ajax = $.ajax({
+    url:"src/view/clank/controller/init.php",
+    async:false,
+    type: 'post',
+    dataType:'text',
+    data: {
+      "action":"exit"
+    },
+    success:function(res){
+      console.log(res);
+      if(res == 1){
+        console.log('游戏结束');
+        $('.player-right').hide();
+        $('.player-gold').hide();
+        initGame();
+      }else{
+        console.log('游戏结束失败');
+      }
+    }
+  });
 });
 </script>
 
